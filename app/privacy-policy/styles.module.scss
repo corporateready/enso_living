@@ -1,0 +1,77 @@
+@reference "tailwindcss";
+
+.terms {
+  @apply bg-[#ffffff] w-full h-auto relative z-0 flex flex-col pb-[30rem];
+  font-family: "Montserrat", sans-serif;
+}
+.header {
+  @apply w-full h-full;
+}
+.container {
+  @apply w-full h-full mx-auto px-[20rem];
+
+  @media screen and (width >= 640px) {
+    @apply w-[1200rem] px-0;
+  }
+
+  @media screen and (width >= 1920px) {
+    @apply w-[1200px];
+  }
+}
+.header__content {
+  @apply w-full h-auto flex justify-between items-center pt-[20rem] pb-[30rem];
+  @media screen and (width >= 640px) {
+    @apply pt-[30rem] pb-[40rem];
+  }
+  @media screen and (width >= 1920px) {
+    @apply pt-[30px] pb-[40px];
+  }
+}
+.logo {
+  @apply w-[120rem] h-[24rem];
+  @media screen and (width >= 640px) {
+    @apply w-[211rem] h-[43rem];
+  }
+}
+.phone {
+  @apply flex justify-center items-center w-[45rem] h-[45rem] border-[1rem] border-[#000000] text-[#0000000] font-medium text-[0rem] rounded-full;
+  box-shadow: 0rem 2rem 10rem 0 rgba(0,0,0,0.7);
+
+  @media screen and (width >= 640px) {
+    @apply w-[182rem] h-[45rem] text-[17rem] hover:cursor-pointer;
+    box-shadow: none;
+  }
+  @media screen and (width >= 1920px) {
+    @apply w-[182px] h-[45px] text-[17px];
+  }
+}
+.terms__content {
+  @apply text-black w-full h-full;
+}
+.headLine__title {
+  @apply text-[14rem] font-bold mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[18rem] ;
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[18px] mb-[10px];
+  }
+}
+.title {
+  @apply text-[14rem] font-bold mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[16rem];
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[16px];
+  }
+}
+.description {
+  @apply text-[12rem] font-medium leading-[120%] mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[14rem];
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[14px];
+  }
+}

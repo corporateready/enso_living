@@ -1,0 +1,55 @@
+@reference "tailwindcss";
+.footer {
+    @apply w-full h-auto bg-[#667761] p-0 m-0;
+}
+.inner {
+    @apply flex flex-col gap-[58rem] px-[25rem] pt-[22rem] pb-[28rem];
+    @media screen and (width >= 640px) {
+        @apply w-[1244rem] px-0 mx-auto pt-[38rem] pb-[100rem] gap-[70rem];
+    }
+}
+.top__content {
+    @apply flex justify-between;
+}
+.google__map_link__mobile {
+    @apply inline-flex justify-center items-center gap-[6rem] text-[10rem] text-white/60 leading-[100%] sm:hidden;
+}
+.google__map_link__desktop {
+    @apply hidden sm:inline-flex items-end gap-[8rem] text-[16rem] text-white/60 leading-[100%];
+}
+.google__map_link {
+    @apply text-[10rem] text-white/60 leading-[100%];
+}
+.footer__phone {
+    @apply inline-block w-[20rem] h-[24rem] sm:w-[42rem] sm:h-[45rem] text-[0rem] relative z-0 ;
+}
+.socials__link {
+    @apply flex items-center gap-[14rem] relative z-0;
+    @media screen and (width >= 640px) {
+        @apply gap-[30rem];
+    }
+}
+.bottom__content {
+    @apply flex flex-col gap-[8rem] w-fit;
+    
+    @media screen and (width >= 640px) {
+        @apply w-full flex flex-row justify-between;
+    }
+}
+.content__text {
+    @apply text-[10rem] text-white/60 leading-[100%];
+    letter-spacing: 0.2rem;
+    @media screen and (width >= 640px) {
+        @apply text-[16rem];
+        letter-spacing: 0rem;
+    }
+}
+.content__links {
+    @apply flex justify-between text-[10rem] text-white/60 leading-[100%] underline;
+    letter-spacing: 0.4rem;
+    @media screen and (width >= 640px) {
+        @apply text-[16rem] mt-[14rem];
+        text-decoration: none;
+        letter-spacing: 0rem;
+    }
+}

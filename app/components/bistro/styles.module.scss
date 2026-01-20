@@ -1,0 +1,37 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-auto relative z-0 bg-[#463C37] sm:hidden;
+}
+.premium__header_inner {
+    @apply flex justify-start px-[23rem] gap-[30rem] pt-[126rem];
+}
+.premium__title_image {
+    @apply w-[80rem] h-[90rem] relative z-0 mt-[11rem];
+}
+.premium__title_content{
+    @apply flex flex-col gap-[11rem] ml-[-8rem]; 
+}
+.premium__title_text {
+    @apply text-white text-[30rem] leading-[100%];
+}
+.premium__title_description {
+    @apply text-white text-[12rem] leading-[125%];
+}
+.premium__content {
+    @apply px-[25rem] flex flex-col;
+}
+.premium__inner_image {
+    @apply w-[380rem] h-[508rem] mt-[16rem] relative z-1;
+
+    .box__dekor {
+        @apply inline-flex justify-center items-center gap-[10rem] absolute bottom-0 left-0 z-2 text-[12rem] text-white w-[285rem] h-[35rem];
+        background: linear-gradient(90deg,rgba(78, 78, 100, 1) 0%, rgba(177, 119, 98, 1) 80%);
+    }
+}
+.hero__btn {
+    @apply w-[380rem] h-[68rem] text-white text-[20rem] leading-[120%] flex justify-end items-center gap-[49rem] rounded-full pr-[8rem] bg-[#667761] mt-[30rem];
+    .span__text {
+        @apply text-center;
+    }
+}

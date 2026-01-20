@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+.section {
+    @apply w-full h-auto relative top-0 left-0 translate-x-0 z-0 bg-white pt-[150rem] pb-[116rem];
+}
+.wrapper {
+    @apply w-full h-auto  flex justify-center relative z-0 mt-[60rem] bg-white;
+}
+.slider__wrapper {
+    width: fit-content;
+    @apply h-auto;
+}
+.head__content {
+    @apply w-full mx-[auto];
+}
+.title {
+    @apply text-black text-[80rem] font-normal ml-[240rem] leading-[100%];
+    letter-spacing: -4rem;
+}
+.subtitle {
+    @apply text-black text-[80rem] font-normal mt-[20rem] leading-[100%] ml-[820rem];
+    letter-spacing: -4rem;
+
+    &__span {
+        @apply inline-block ml-[242rem];
+    }
+}
+.slider__wrapper {
+    @apply flex gap-[40rem];
+}
+.slide__item {
+    @apply relative z-0 w-[1440rem] h-[810rem];
+}

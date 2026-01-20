@@ -1,0 +1,63 @@
+@reference "tailwindcss";
+
+.section {
+    @apply w-full h-auto relative z-0;
+}
+.wrapper {
+    @apply w-full h-full flex justify-end ;
+}
+.inner {
+    @apply w-[1340rem] h-full pt-[210rem] mr-0;
+}
+.rightside__line {
+@apply w-[340rem] h-auto bg-[#B17762] relative z-0;
+&::after {
+    content: "";
+    @apply block absolute top-0 left-0 z-1 w-full h-full;
+    background: linear-gradient(180deg,rgba(70, 60, 55, 1) 1%, rgba(70, 60, 55, 0.21) 80%, rgba(70, 60, 55, 0) 100%);
+}
+}
+.inner__header {
+    @apply flex justify-start gap-[78rem];
+}
+.inner__image {
+    @apply inline-block w-[652rem] h-[424rem] relative z-0;
+}
+.head__content{
+    @apply flex flex-col; 
+}
+.title__text {
+    @apply text-white text-[60rem] leading-[100%];
+}
+.description__text {
+    @apply text-white text-[26rem] leading-[118%] mt-[15rem];
+}
+.content {
+    @apply flex flex-col mt-[50rem];
+}
+.rightside__image {
+    @apply w-[226rem] h-[240rem] relative top-0 left-0 translate-0 z-2 mt-800 mx-auto;
+}
+// <===== items =====>
+.content__columns {
+    @apply w-full h-auto flex gap-[120rem];
+}
+.column__left {
+    @apply w-full h-auto;
+}
+.column__right {
+    @apply w-full h-auto;
+}
+.inner__list_item {
+    @apply flex gap-[78rem] w-full border-b-[2px] border-[#5A4C45] py-[25rem];
+}
+.item__text {
+    @apply text-[26rem] text-white leading-[115%];
+}
+.offer__btn {
+    @apply w-[455rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] bg-[#667761] mt-[26rem] hover:cursor-pointer;
+    .span__text {
+        @apply text-end;
+    }
+
+}

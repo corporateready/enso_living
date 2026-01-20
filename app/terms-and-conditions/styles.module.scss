@@ -1,0 +1,43 @@
+@reference "tailwindcss";
+
+.terms {
+  @apply bg-[#ffffff] w-full h-auto relative z-0 flex flex-col pb-[30rem];
+  font-family: "Montserrat", sans-serif;
+}
+.container {
+  @apply w-full h-full mx-auto px-[20rem];
+
+  @media screen and (width >= 640px) {
+    @apply w-[1200rem] px-0;
+  }
+}
+.terms__content {
+  @apply text-black w-full h-full;
+}
+.headLine__title {
+  @apply text-[14rem] font-bold mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[18rem] ;
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[18px] mb-[10px];
+  }
+}
+.title {
+  @apply text-[14rem] font-bold mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[16rem];
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[16px];
+  }
+}
+.description {
+  @apply text-[12rem] font-medium leading-[120%] mb-[10rem];
+  @media screen and (width >= 640px) {
+    @apply text-[14rem];
+  }
+  @media screen and (width >= 1920px) {
+    @apply text-[14px];
+  }
+}

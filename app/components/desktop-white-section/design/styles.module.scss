@@ -1,0 +1,21 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply hidden sm:block w-full h-auto relative z-0;
+}
+.premium__inner_image {
+    @apply w-full h-[1018rem] relative z-1 overflow-hidden;
+}
+.top__text {
+    @apply w-[1298rem] flex flex-col mx-auto relative z-1 text-[80rem] text-white leading-[102%] mt-[224rem];
+}
+
+.text__1 {
+    @apply inline-flex;
+}
+.text__2 {
+    @apply inline-flex justify-end;
+}
+.text__3 {
+    @apply inline-flex ml-[110rem];
+}

@@ -1,0 +1,36 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-auto relative z-0 bg-[#463C37] sm:hidden;
+}
+.premium__header_inner {
+    @apply flex justify-start items-end px-[23rem] gap-[30rem] pt-[120rem];
+}
+.premium__title_image {
+    @apply w-[80rem] h-[90rem] relative z-0 mt-[20rem];
+}
+.premium__title_content{
+    @apply flex flex-col gap-[11rem] ml-[-8rem]; 
+}
+.premium__title_text {
+    @apply text-white text-[30rem] leading-[100%];
+}
+.premium__content {
+    @apply px-[25rem] flex flex-col;
+}
+.premium__inner_image {
+    @apply w-[380rem] h-[306rem] mt-[22rem] relative z-1;
+}
+// <===== items =====>
+.inner__list_item {
+    @apply flex gap-[86rem] w-full border-b-[1rem] border-[#5A4C45] pt-[22rem] pb-[4em];
+}
+.item__text {
+    @apply text-[12rem] text-white leading-[120%];
+}
+.hero__btn {
+    @apply w-[380rem] h-[68rem] text-white text-[20rem] leading-[120%] flex justify-end items-center gap-[49rem] rounded-full pr-[8rem] bg-[#667761] mt-[30rem];
+    .span__text {
+        @apply text-end;
+    }
+}

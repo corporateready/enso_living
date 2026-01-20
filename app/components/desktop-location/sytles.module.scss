@@ -1,0 +1,31 @@
+@reference "tailwindcss";
+.section {
+    @apply w-full h-auto relative z-0 ;
+}
+
+.head__content {
+    @apply w-full mx-[auto] absolute top-0 left-0 z-1;
+}
+.head__subcontent {
+    @apply w-full mx-[auto] absolute top-[100rem] left-0 z-1;
+}
+.head__title {
+    @apply text-black text-[80rem] font-normal mt-[148rem] ml-[240rem] leading-[100%];
+    letter-spacing: -4rem;
+}
+.head__subtitle {
+    @apply text-black text-[80rem] font-normal mt-[-2rem] leading-[100%] ml-[1156rem];
+    letter-spacing: -4rem;
+}
+.head__subcontent_text {
+    @apply text-black text-[26rem] font-normal mt-[22rem] leading-[120%] ml-[1156rem];
+    letter-spacing: 0rem;
+}
+.offer__btn {
+    @apply w-[435rem] h-[80rem] absolute top-[330rem] left-[242rem] translate-0 z-2 text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] hover:cursor-pointer;
+    background: linear-gradient(90deg,rgba(78, 78, 100, 0.9) 0%, rgba(177, 119, 98, 0.9) 80%);
+    .span__text {
+        @apply text-end;
+    }
+
+}

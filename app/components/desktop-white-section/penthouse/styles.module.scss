@@ -1,0 +1,61 @@
+@reference "tailwindcss";
+
+.section {
+    @apply w-full h-auto relative z-0;
+}
+.wrapper {
+    @apply w-full h-full flex justify-end gap-[106rem];
+    flex-direction: row-reverse
+}
+.inner {
+    @apply w-auto h-auto pt-[153rem] mr-0;
+}
+.rightside__line {
+@apply w-[340rem] h-auto bg-[#667761] relative z-0;
+}
+.rightside__decor {
+    @apply inline-flex absolute top-0 left-0 z-1 w-full h-full;
+}
+.rightside__image {
+    @apply w-[224rem] h-[240rem] relative z-1 top-0 left-0 translate-0 z-1 mt-[140rem] mx-auto;
+}
+.inner__header {
+    @apply flex justify-start gap-[20rem];
+}
+.inner__image {
+    @apply inline-block w-[725rem] h-[407rem] relative z-0;
+}
+.head__content{
+    @apply flex flex-col; 
+}
+.title__text {
+    @apply text-black text-[60rem] leading-[100%] mt-[-8rem];
+}
+.description__text {
+    @apply text-black text-[26rem] leading-[118%] mt-[15rem] pl-[4rem];
+}
+.content {
+    @apply w-full flex mt-[56rem];
+}
+// <===== items =====>
+.inner__list_item {
+    @apply flex flex-col justify-between gap-[83rem] w-fit border-l-[1px] border-[#5A4C45] px-[20rem] pb-[11em];
+    &:nth-child(5) {
+        @apply pr-0;
+    }
+}
+.item__text {
+    @apply text-[26rem] text-black leading-[118%];
+
+    .span__text {
+        @apply font-semibold;
+    }
+}
+.offer__btn {
+    @apply w-[540rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[204rem] rounded-full pr-[10rem] mt-[68rem] hover:cursor-pointer;
+    background: linear-gradient(90deg,rgba(78, 78, 100, 0.9) 0%, rgba(177, 119, 98, 0.9) 80%);
+    .span__text {
+        @apply text-end;
+    }
+
+}
