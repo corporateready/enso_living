@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import styles from "./styles.module.scss";
 import { motion } from "motion/react";
@@ -105,7 +106,7 @@ const Index = () => {
         </defs>
       </svg>
 
-      <div className={styles.premium__inner}>
+      <div className={styles.premium__inner} ref={ref}>
         <div className={styles.premium__inner_content}>
           <motion.p
             initial={{ opacity: 0, y: 50 }}
@@ -149,7 +150,7 @@ const Index = () => {
         </div>
         <div className={styles.inner__logo}>
           <motion.svg
-            initial={{ opacity: 0 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}

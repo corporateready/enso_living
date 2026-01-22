@@ -49,7 +49,7 @@ const Index = ({ handlerFormOpen }) => {
                 din Brașov, dispus în 3 niveluri — {""}
                 <br />o capodoperă arhitecturală ce {""}
                 <br />
-                oferă liniște de la altitudine
+                oferă liniște de la altitudine.
               </motion.p>
               <motion.button
                 type="button"

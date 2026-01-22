@@ -49,7 +49,7 @@ const Index = ({ handlerFormOpen }) => {
             >
               Cel mai exclusivist penthouse din Brașov,{""}
               <br /> dispus în 3 niveluri — o capodoperă arhitecturală{""}
-              <br /> ce oferă liniște de la altitudine
+              <br /> ce oferă liniște de la altitudine.
             </motion.p>
           </div>
         </div>

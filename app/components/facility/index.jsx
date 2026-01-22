@@ -69,11 +69,11 @@ const Index = () => {
           </div>
           <div className={styles.inner__list}>
             <motion.div 
-            initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-            className={styles.inner__list_item__up}>
+              className={styles.inner__list_item__up}>
               <span className={styles.item__number}>72</span>
               <span className={styles.item__text}>
                 locuri de parcări auto:
@@ -87,14 +87,11 @@ const Index = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className={styles.inner__list_item__b}>
-              <span className={styles.item__number}>61</span>
+              <span className={styles.item__number}>15</span>
               <span className={styles.item__text}>
-                locuri pentru biciclete
-                <br />
-                în subterană și la exterior — <br />
-                pentru un stil de viață urban,
-                <br />
-                conectat la natură
+                locuri de parcare exterioare {""}
+                <br />pentru biciclete, amplasate {""}
+                <br />în curtea ansamblului
               </span>
             </motion.div>
             <motion.div 
@@ -105,13 +102,10 @@ const Index = () => {
             className={styles.inner__list_item}>
               <span className={styles.item__number}>13</span>
               <span className={styles.item__text}>
-                locuri de parcare exterioare,
-                <br />
-                oferind flexibilitate și acces
-                <br />
-                imediat în proximitatea
-                <br />
-                clădirii
+                locuri de parcare exterioare, {""}
+                <br />oferind flexibilitate și acces {""}
+                <br />imediat în proximitatea {""}
+                <br />clădirii
               </span>
             </motion.div>
           </div>

@@ -10,7 +10,7 @@
     @apply text-white text-[66rem] uppercase font-normal w-auto leading-[91%] absolute top-[114rem] left-[18rem] z-2 translate-x-0 flex flex-col;
     letter-spacing: -2.4rem;
     @media screen and (width >= 640px) {
-        @apply text-[160rem] top-[168rem] left-[248rem] leading-[92%] z-1 tracking-tighter;
+        @apply text-[160rem] top-[168rem] left-[240rem] leading-[92%] z-1 translate-0 tracking-tighter;
     }
 }
 .hero__text_decor {
@@ -41,14 +41,14 @@
 }
 .hero__btn {
     @apply w-[362rem] h-[68rem] text-white text-[18rem] leading-[127%] flex justify-end items-center gap-[14rem] relative top-[684rem] left-1/2 -translate-1/2 z-3 overflow-hidden rounded-full pr-[6rem] hover:cursor-pointer tracking-[0.2rem];
-    background: linear-gradient(90deg,rgba(78, 78, 100, 0.9) 0%, rgba(177, 119, 98, 0.9) 80%);
+    background: linear-gradient(90deg,rgba(78, 78, 100, 0.7) 0%, rgba(177, 119, 98, 0.7) 80%);
     .span__blur {
-        @apply absolute top-0 left-0 z-4 inset-0 backdrop-blur-[1rem];
+        @apply absolute top-0 left-0 z-4 inset-0 backdrop-blur-[2.5rem];
     }
     .span__text {
-        @apply text-end relative z-5;
+        @apply relative z-5;
     }
     @media screen and (width >= 640px) {
-        @apply w-[462rem] h-[86rem] text-[26rem] top-[848rem] gap-[24rem] pr-[10rem];
+        @apply w-[462rem] h-[86rem] text-[26rem] top-[848rem] gap-[20rem] pr-[10rem];
     }
 }

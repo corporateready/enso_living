@@ -30,11 +30,13 @@ const Index = () => {
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.5, ease: "easeOut" }}
               >
-                Parcare subterană{""}
-                <br />
-                în 2 niveluri dedicate{""}
-                <br />
-                rezidenților și zonei de business
+                Parcare subterană {""}
+                <br className="inline-block sm:hidden"/>
+                în 2 niveluri {""}
+                <br className="hidden sm:block"/>dedicate {""}
+                <br className="inline-block sm:hidden"/>
+                rezidenților și zonei {""}
+                <br className="hidden sm:inline-block"/>de business
               </motion.p>
             </div>
           </div>
@@ -50,6 +52,7 @@ const Index = () => {
             />
           </div>
           <div className={styles.content}>
+            
             <motion.div className={styles.inner__list_item__up}
             initial={{ opacity: 0, height: "20rem" }}
               whileInView={{ opacity: 1, height: "132rem" }}
@@ -64,20 +67,19 @@ const Index = () => {
                 acces privat și securizat
               </span>
             </motion.div>
+
             <motion.div className={styles.inner__list_item__medium}
             initial={{ opacity: 0, height: "20rem" }}
               whileInView={{ opacity: 1, height: "132rem" }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             >
-              <span className={styles.item__number}>61</span>
+              <span className={styles.item__number}>15</span>
 
               <span className={styles.item__text}>
-                locuri pentru biciclete în subterană{""}
-                <br />
-                și la exterior — pentru un stil de viață {""}
-                <br />
-                urban, conectat la natură
+                locuri de parcare exterioare {""}
+                <br />pentru biciclete, amplasate {""}
+                <br />în curtea ansamblului
               </span>
             </motion.div>
             <motion.div className={styles.inner__list_item__down}
@@ -89,11 +91,9 @@ const Index = () => {
               <span className={styles.item__number}>13</span>
 
               <span className={styles.item__text}>
-                locuri de parcare exterioare, oferind
-                <br />
-                flexibilitate și acces imediat în
-                <br />
-                proximitatea clădirii
+                locuri de parcare exterioare, {""}
+                <br />oferind flexibilitate și acces {""}
+                <br />imediat în proximitatea clădirii
               </span>
             </motion.div>
           </div>

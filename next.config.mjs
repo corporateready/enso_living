@@ -2,7 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  // optimizeFonts: true,
+  optimizeFonts: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },

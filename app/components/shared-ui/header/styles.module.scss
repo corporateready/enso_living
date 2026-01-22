@@ -4,7 +4,7 @@
     @apply w-full h-auto absolute top-0 left-0 z-1;
 }
 .inner {
-    @apply w-full flex justify-between pt-[27rem] px-[25rem];
+    @apply w-full flex justify-between pt-[27rem] px-[23rem];
     @media screen and (width >= 640px) {
         @apply w-[1444rem] mx-auto p-0 pt-[50rem];
     }

@@ -39,7 +39,7 @@
 }
 // <===== items =====>
 .inner__list_item {
-    @apply flex flex-col justify-between gap-[83rem] w-fit border-l-[1px] border-[#5A4C45] px-[20rem] pb-[11em];
+    @apply flex flex-col justify-between gap-[83rem] w-fit border-l-[1px] border-[#5A4C45] px-[20rem] pb-0;
     &:nth-child(5) {
         @apply pr-0;
     }

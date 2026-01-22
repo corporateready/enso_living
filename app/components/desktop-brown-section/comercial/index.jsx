@@ -96,7 +96,7 @@ const Index = ({ handlerFormOpen }) => {
                 </svg>
 
                 <span className={styles.item__text}>
-                  Spațiu generos de 332 m², {""}
+                  Spațiu generos de 310 m², {""}
                   <br />
                   adaptabil oricărui tip de business
                 </span>

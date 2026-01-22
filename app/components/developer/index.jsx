@@ -1,11 +1,13 @@
+"use client"
 import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import { motion } from "motion/react";
 
 const Index = () => {
+  const ref = React.useRef(null)
   return (
-    <div className={styles.premium}>
+    <div className={styles.premium} ref={ref}>
       <svg
         className="absolute top-[-4%] left-[73%] -translate-x-1/2 z-1 w-[730rem] h-[587rem]"
         viewBox="0 0 1671 655"
@@ -147,8 +149,8 @@ const Index = () => {
             și valoare durabilă.
           </motion.p>
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
             className={styles.inner__logo}

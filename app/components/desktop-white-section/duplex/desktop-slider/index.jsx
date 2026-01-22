@@ -27,11 +27,11 @@ export const DesktopSlider = (props) => {
   } = usePrevNextButtons(emblaApi);
   const slides = [
     { id: 1, image: img_1 },
-    { id: 2, image: img_2 },
-    { id: 3, image: img_3 },
-    { id: 5, image: img_5 },
-    { id: 6, image: img_6 },
-    { id: 7, image: img_7 },
+    { id: 2, image: img_7 },
+    { id: 3, image: img_2 },
+    { id: 5, image: img_3 },
+    { id: 6, image: img_5 },
+    { id: 7, image: img_6 },
   ];
   return (
     <section className={styles.embla}>
