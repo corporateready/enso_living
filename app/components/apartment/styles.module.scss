@@ -19,14 +19,14 @@
     @apply text-black text-[12rem] leading-[125%];
 }
 .premium__content {
-    @apply px-[25rem] flex flex-col;
+    @apply px-[23rem] flex flex-col;
 }
 .premium__inner_image {
-    @apply w-[380rem] h-[500rem] relative z-1;
+    @apply w-full h-[500rem] relative z-1;
 }
 
 .hero__btn {
-    @apply w-[382rem] h-[68rem] text-white text-[20rem] leading-[100%] flex justify-end items-center gap-[37rem] rounded-full pr-[8rem] mt-[20rem];
+    @apply w-full h-[68rem] text-white text-[20rem] leading-[100%] flex justify-end items-center gap-[37rem] rounded-full pr-[8rem] mt-[20rem];
     background: linear-gradient(90deg,rgba(78, 78, 100, 1) 0%, rgba(177, 119, 98, 1) 80%);
     .span__text {
         @apply text-end;

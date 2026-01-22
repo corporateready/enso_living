@@ -8,7 +8,7 @@
 }
 
 .hero__btn {
-    @apply w-[382rem] h-[68rem] text-white text-[20rem] leading-[100%] absolute top-[28rem] left-1/2 -translate-1/2 z-1 flex justify-end items-center gap-[23rem] rounded-full pr-[6rem];
+    @apply w-[370rem] h-[68rem] text-white text-[20rem] leading-[100%] absolute top-[28rem] left-1/2 -translate-1/2 z-1 flex justify-end items-center gap-[23rem] rounded-full pr-[6rem];
     background: linear-gradient(90deg,rgba(78, 78, 100, 1) 0%, rgba(177, 119, 98, 1) 80%);
     .span__text {
         @apply text-end;

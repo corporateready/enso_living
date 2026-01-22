@@ -83,7 +83,7 @@ const Hero = ({ handlerFormOpen }) => {
             y: 0,
             transition: { duration: 0.5, delay: 0.2 },
           }}
-          className="inline-flex ml-[90rem] tracking-tighter"
+          className="inline-flex ml-[90rem]"
         >
           imobiliar
         </motion.span>

@@ -94,7 +94,6 @@ const Index = ({ handlerFormOpen }) => {
                     strokeLinejoin="round"
                   />
                 </svg>
-
                 <span className={styles.item__text}>
                   Spațiu generos de 310 m², {""}
                   <br />

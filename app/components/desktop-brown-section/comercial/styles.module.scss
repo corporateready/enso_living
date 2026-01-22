@@ -35,7 +35,7 @@
 }
 // <===== items =====>
 .inner__list_item {
-    @apply flex gap-[78rem] w-full border-b-[2px] border-[#5A4C45] py-[25rem];
+    @apply flex gap-[78rem] w-[115%] border-b-[2px] border-[#5A4C45] py-[25rem];
 }
 .item__text {
     @apply text-[26rem] text-white leading-[117%];

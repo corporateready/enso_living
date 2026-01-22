@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .header {
-    @apply w-full h-auto absolute top-0 left-0 z-1;
+    @apply w-full h-auto absolute top-0 left-0 translate-0 z-1;
 }
 .inner {
     @apply w-full flex justify-between pt-[27rem] px-[23rem];

@@ -2,7 +2,7 @@
 .hero {
     @apply w-full h-[810rem] relative z-0;
     @media screen and (width >= 640px) {
-        @apply h-[1067rem];
+        @apply h-[1067rem] relative z-0;
     }
 }
 
@@ -10,7 +10,9 @@
     @apply text-white text-[66rem] uppercase font-normal w-auto leading-[91%] absolute top-[114rem] left-[18rem] z-2 translate-x-0 flex flex-col;
     letter-spacing: -2.4rem;
     @media screen and (width >= 640px) {
-        @apply text-[160rem] top-[168rem] left-[240rem] leading-[92%] z-1 translate-0 tracking-tighter;
+        @apply text-[160rem] absolute top-[168rem] left-[226rem] leading-[92%] z-1;
+        letter-spacing: -10rem;
+        transform: none;
     }
 }
 .hero__text_decor {
