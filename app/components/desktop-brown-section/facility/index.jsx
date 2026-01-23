@@ -62,7 +62,7 @@ const Index = () => {
               <span className={styles.item__number}>70</span>
 
               <span className={styles.item__text}>
-                locuri de parcări subterane:{""}
+                locuri de parcări subterane{""}
                 <br />
                 acces privat și securizat
               </span>
