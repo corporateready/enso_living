@@ -74,9 +74,9 @@ const Index = () => {
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
               className={styles.inner__list_item__up}>
-              <span className={styles.item__number}>72</span>
+              <span className={styles.item__number}>70</span>
               <span className={styles.item__text}>
-                70 locuri de parcări subterane{""}
+                locuri de parcări subterane:
                 <br />
                 acces privat și securizat
               </span>

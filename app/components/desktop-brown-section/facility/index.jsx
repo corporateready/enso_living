@@ -59,10 +59,10 @@ const Index = () => {
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
-              <span className={styles.item__number}>72</span>
+              <span className={styles.item__number}>70</span>
 
               <span className={styles.item__text}>
-                70 locuri de parcări subterane{""}
+                locuri de parcări subterane:{""}
                 <br />
                 acces privat și securizat
               </span>
