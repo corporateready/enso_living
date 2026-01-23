@@ -2,6 +2,12 @@
   command = "next build"
   publish = ".next"
 
+  [[redirects]]
+  from = "https://ensoliving.ro/*"
+  to = "https://enso.ro/:splat"
+  status = 301
+  force = true
+
 [build.environment]
   NODE_VERSION = "20"
   NEXT_PRIVATE_BUILD_WORKER = "1"
