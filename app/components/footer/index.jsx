@@ -190,7 +190,7 @@ const Index = () => {
           </Link>
           <div className="flex flex-col gap-[8rem] sm:gap-0">
             <p className={styles.content__text}>
-              © 2025 Toate drepturile sunt rezervate.
+              {`© ${new Date().getFullYear()} Toate drepturile sunt rezervate.`}
             </p>
             <div className={styles.content__links}>
               <Link href={"/terms-and-conditions"}>Terms & conditions</Link>
