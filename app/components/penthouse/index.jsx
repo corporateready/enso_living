@@ -15,7 +15,7 @@ const Index = ({ handlerFormOpen }) => {
             <Building />
             <motion.div
               className="w-[60rem] h-[27rem] absolute top-0 right-4 translate-0 z-2"
-              initial={{ opacity: 0 }}
+              initial={{ opacity: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
