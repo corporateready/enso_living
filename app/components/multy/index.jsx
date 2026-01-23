@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
@@ -14,17 +14,16 @@ const Index = () => {
           <div className={styles.premium__title_image}>
             <Building />
             <motion.div
-              initial={{ opacity: 0 }}
+              className="w-56 h-48 absolute bottom-16 left-16 translate-0 z-3"
+              initial={{ opacity: 1 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, ease: "easeOut" }}
-              className="w-[13rem] h-[12rem] absolute bottom-[4rem] left-[4.5rem] translate-0 z-3"
             >
               <Image
                 src="/building-2.webp"
                 alt="building part"
-                loading="eager"
-                priority={true}
+                loading="lazy"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
