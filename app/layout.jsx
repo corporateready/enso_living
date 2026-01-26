@@ -67,7 +67,7 @@ export default function RootLayout({ children }) {
           href="/favicon_io/favicon-16x16.png"
         />
         <link rel="manifest" href="/favicon_io/site.webmanifest" />
-        {/* <GoogleTagManager gtmId={GTM_ID} />
+        <GoogleTagManager gtmId={GTM_ID} />
         <noscript
           dangerouslySetInnerHTML={{
             __html: `
@@ -78,7 +78,7 @@ export default function RootLayout({ children }) {
             </iframe>
             `,
           }}
-        /> */}
+        />
       </head>
       <body className={`antialiased`}>
         {children}
