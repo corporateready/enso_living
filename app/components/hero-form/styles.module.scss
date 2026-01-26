@@ -65,7 +65,7 @@
     }
 }
 .phone__input {
-    @apply w-full relative z-3 bg-[#faf9f8] p-0 border-b-[1px] border-black;
+    @apply w-full relative z-3 bg-[#faf9f8] p-0;
   
     &:before {
       content: "";
@@ -77,18 +77,29 @@
       height: 100%;
       background: #000;
     }
-  
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 4;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #000;
+    }
+
     @media screen and (width >= 640px) {
-      @apply h-[40rem] w-full;
+      @apply h-full w-full;
     }
   }
 .offer__btn {
-    @apply w-full h-[57rem] text-white text-[16rem] leading-[100%] flex justify-end items-center gap-[10rem] rounded-full pr-[8rem] bg-[#667761] mt-[12rem];
+    @apply w-full h-[57rem] text-white text-[15rem] leading-[100%] flex justify-end items-center gap-[10rem] rounded-full pr-[8rem] bg-[#667761] mt-[12rem];
     .span__text {
         @apply text-end;
     }
     @media screen and (width >= 640px) {
-        @apply w-[532rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] bg-[#667761] mt-[20rem] cursor-pointer hover:scale-105 transition-all duration-200 disabled:cursor-default disabled:hover:scale-100;
+        @apply w-[532rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] bg-[#667761] mt-[10rem] cursor-pointer transition-all duration-200 disabled:cursor-default;
     }
 
 }
