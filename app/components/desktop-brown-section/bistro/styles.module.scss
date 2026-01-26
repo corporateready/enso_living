@@ -23,7 +23,7 @@ background: linear-gradient(180deg,rgba(177, 119, 98, 1) 0%, rgba(128, 99, 99, 1
     @apply text-white text-[60rem] leading-[100%];
 }
 .description__text {
-    @apply text-white text-[26rem] leading-[118%] mt-[28rem] mr-[40rem];
+    @apply text-white text-[26rem] leading-[118%] mt-[28rem];
 }
 .content {
     @apply flex flex-col mt-[30rem];

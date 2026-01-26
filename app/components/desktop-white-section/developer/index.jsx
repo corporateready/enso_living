@@ -115,7 +115,9 @@ const Index = () => {
             transition={{ duration: 0.5, ease: "easeOut" }}
             className={styles.title}
           >
-            ENSO Development
+            {/* ENSO Development */}
+            Despre dezvoltator 
+            <br />imobiliar
           </motion.p>
           <motion.p
             className={styles.description}
@@ -124,14 +126,12 @@ const Index = () => {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.5, ease: "easeOut" }}
           >
-            Dezvoltator imobiliar integrat vertical,
-            <br />
-            cu prezență în Moldova și România,
-            <br />
+            ENSŌ Development — dezvoltator imobiliar integrat 
+            <br />vertical, cu prezență în Moldova și România,<br /> 
             lider în vânzări imobiliare în 2024 în Republica Moldova.
           </motion.p>
           <motion.p
-            className={styles.description}
+            className={styles.description__b}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}

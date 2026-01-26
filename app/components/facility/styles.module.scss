@@ -35,11 +35,14 @@
     @apply flex gap-[125rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[8rem] overflow-y-hidden;
 }
 .inner__list_item__b {
-    @apply flex gap-[46rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[8rem] pl-[78rem] overflow-y-hidden;
+    @apply flex gap-[48rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[8rem] pl-[79rem] leading-[115%] overflow-y-hidden;
 }
 .item__number {
     @apply text-white text-[70rem] leading-[35%];
 }
 .item__text {
     @apply text-[12rem] text-white leading-[110%];
+}
+.item__text_med {
+    @apply text-[12rem] text-white leading-[125%];
 }

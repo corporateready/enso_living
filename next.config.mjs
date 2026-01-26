@@ -2,20 +2,21 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  // optimizeFonts: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
   images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'res.cloudinary.com',
+        pathname: '/daxfjxuat/**',
+      },
+    ],
     formats: ['image/webp'],
     deviceSizes: [640, 1920],
     minimumCacheTTL: 60,
     qualities: [25, 50, 65, 85],
-  },
-  experimental: {
-    // optimizePackageImports: ["posthog-js", "react-icons"],
-    // optimizeCss: true,
-    // nextScriptWorkers: true,
   },
   productionBrowserSourceMaps: false,
   async rewrites() {

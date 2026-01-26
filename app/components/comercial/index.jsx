@@ -68,7 +68,7 @@ const Index = ({ handlerFormOpen }) => {
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <svg
-                className="w-[12rem] h-[12rem]"
+                className="w-[12rem] h-[13rem]"
                 viewBox="0 0 13 13"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -111,8 +111,7 @@ const Index = ({ handlerFormOpen }) => {
               transition={{ duration: 0.5, delay: .1, ease: "easeOut" }}
             >
               <svg
-                width="13"
-                height="14"
+                className="flex w-[13rem] h-[14rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -150,8 +149,7 @@ const Index = ({ handlerFormOpen }) => {
               transition={{ duration: 0.5, delay: .2, ease: "easeOut" }}
             >
               <svg
-                width="13"
-                height="14"
+                className="w-[13rem] h-[14rem] mt-[-2rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

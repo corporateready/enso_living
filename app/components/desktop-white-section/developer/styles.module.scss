@@ -1,24 +1,22 @@
 @reference "tailwindcss";
 
 .premium {
-    @apply hidden sm:block w-full h-[1010rem] relative z-0;
+    @apply hidden sm:block w-full h-[1000rem] relative z-0;
     background: linear-gradient(180deg,rgba(177, 119, 98, 1) 0%, rgba(78, 78, 100, 1) 100%);
 }
 .premium__inner{
-    @apply w-[1450rem] h-full flex justify-between relative z-1 mx-auto pt-[278rem] overflow-hidden;
+    @apply w-[1450rem] h-full flex justify-between relative z-1 mx-auto pt-[178rem] overflow-hidden;
 }
 .title {
-    // @apply w-[685rem] h-
-    @apply text-[80rem] text-white relative z-0;
+    @apply text-[80rem] text-white relative z-0 leading-[120%];
     letter-spacing: -5%;
-
-    &:after {
-        @apply content-[''] absolute top-[20rem] left-[165rem] translate-0 z-1 w-[26rem] h-[2rem] bg-white leading-0;
-    }
 }
 .description {
-    @apply w-full flex flex-col relative z-1 text-[26rem] text-white leading-[124%] mt-[50rem];
+    @apply w-full flex flex-col relative z-1 text-[26rem] text-white leading-[120%] mt-[82rem];
+}
+.description__b {
+    @apply w-full flex flex-col relative z-1 text-[26rem] text-white leading-[120%] mt-[48rem];
 }
 .inner__logo {
-    @apply w-[340rem] h-[440rem] mt-[26rem] relative z-1;
+    @apply w-[340rem] h-[440rem] mt-[126rem] relative z-1;
 }

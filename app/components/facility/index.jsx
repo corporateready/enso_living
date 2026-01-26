@@ -88,7 +88,7 @@ const Index = () => {
               transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
             className={styles.inner__list_item__b}>
               <span className={styles.item__number}>15</span>
-              <span className={styles.item__text}>
+              <span className={styles.item__text_med}>
                 locuri de parcare exterioare {""}
                 <br />pentru biciclete, amplasate {""}
                 <br />în curtea ansamblului

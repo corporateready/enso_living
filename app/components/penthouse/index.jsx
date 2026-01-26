@@ -69,8 +69,7 @@ const Index = ({ handlerFormOpen }) => {
             />
             <div className={styles.box__dekor}>
               <svg
-                width="13"
-                height="13"
+                className="w-[13rem] h-[13rem]"
                 viewBox="0 0 13 13"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -137,8 +136,7 @@ const Index = ({ handlerFormOpen }) => {
               className={styles.inner__list_item}
             >
               <svg
-                width="13"
-                height="14"
+                className="w-[14rem] h-[13rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,8 +175,7 @@ const Index = ({ handlerFormOpen }) => {
               className={styles.inner__list_item}
             >
               <svg
-                width="19"
-                height="16"
+                className="w-[21rem] h-[15rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -222,8 +219,7 @@ const Index = ({ handlerFormOpen }) => {
               className={styles.inner__list_item}
             >
               <svg
-                width="13"
-                height="14"
+                className="w-[13rem] h-[13rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -256,8 +252,7 @@ const Index = ({ handlerFormOpen }) => {
               className={styles.inner__list_item}
             >
               <svg
-                width="13"
-                height="14"
+                className="w-[13rem] h-[13rem]"
                 viewBox="0 0 13 14"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"

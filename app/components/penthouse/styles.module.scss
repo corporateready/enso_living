@@ -25,13 +25,13 @@
     @apply w-full h-[200rem] mt-[10rem] relative z-1;
 }
 .inner__list_item {
-    @apply flex gap-[88rem] w-full h-auto border-b-[1px] border-[#000] pt-[24rem] pb-[10rem];
+    @apply flex items-start gap-[88rem] w-full h-auto border-b-[1px] border-[#000] pt-[24rem] pb-[10rem];
 }
 .inner__list {
-    @apply mt-[4rem];
+    @apply mt-[2rem];
 }
 .item__text {
-    @apply text-[12rem] text-black leading-[110%];
+    @apply text-[12rem] text-black leading-[110%] pt-[3rem];
     span {
         @apply font-semibold;
     }
