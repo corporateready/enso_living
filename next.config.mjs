@@ -2,7 +2,7 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  optimizeFonts: true,
+  // optimizeFonts: true,
   compiler: {
     removeConsole: process.env.NODE_ENV === "production",
   },
@@ -13,9 +13,9 @@ const nextConfig = {
     qualities: [25, 50, 65, 85],
   },
   experimental: {
-    optimizePackageImports: ["posthog-js", "react-icons"],
-    optimizeCss: true,
-    nextScriptWorkers: true,
+    // optimizePackageImports: ["posthog-js", "react-icons"],
+    // optimizeCss: true,
+    // nextScriptWorkers: true,
   },
   productionBrowserSourceMaps: false,
   async rewrites() {
@@ -27,28 +27,28 @@ const nextConfig = {
     ];
   },
   skipTrailingSlashRedirect: true,
-  async headers() {
-    return [
-      {
-        source: "/_next/static/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/images/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-    ];
-  },
+  // async headers() {
+  //   return [
+  //     {
+  //       source: "/_next/static/:path*",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //     {
+  //       source: "/images/:path*",
+  //       headers: [
+  //         {
+  //           key: "Cache-Control",
+  //           value: "public, max-age=31536000, immutable",
+  //         },
+  //       ],
+  //     },
+  //   ];
+  // },
 };
 
 export default nextConfig;

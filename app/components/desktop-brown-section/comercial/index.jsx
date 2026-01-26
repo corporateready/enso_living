@@ -2,16 +2,18 @@
 import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 import Building from "../../svg-components/building";
 import ButtonPaperSVG from "../../svg-components/ButtonPaper";
 
 const Index = ({ handlerFormOpen }) => {
+const container = React.useRef(null)
   const ref = React.useRef(null);
+  const isInView = useInView(ref, { root: container, once: true, margin: "-100px" });
   const [isHoveredButton, setIsHoveredButton] = React.useState(false);
   return (
-    <div className={styles.section}>
-      <div className={styles.wrapper} ref={ref}>
+    <div className={styles.section} ref={ref}>
+      <div className={styles.wrapper} >
         <div className={styles.inner}>
           <div className={styles.inner__header}>
             <div className={styles.inner__image}>
@@ -199,10 +201,8 @@ const Index = ({ handlerFormOpen }) => {
           <div className={styles.rightside__image}>
             <Building />
             <motion.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
               className="absolute bottom-[11rem] right-[11rem] translate-0 z-3 w-[56rem] h-[20rem]"
             >
               <Image
