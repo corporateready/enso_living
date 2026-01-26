@@ -137,7 +137,7 @@ const page = () => {
             <div className={styles.footer__content}>
               <div className="flex flex-col gap-[8rem] sm:gap-0">
                 <p className={styles.content__text}>
-                  © 2025 Toate drepturile sunt rezervate.
+                  © 2026 Toate drepturile sunt rezervate.
                 </p>
                 <div className={styles.content__links}>
                   <Link href={"/terms-and-conditions"}>Terms & conditions</Link>
