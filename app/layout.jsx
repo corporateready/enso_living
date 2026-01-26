@@ -28,10 +28,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={inter.className} data-scroll-behavior="smooth">
       <head>
-        <link rel="preload" as="image" href="/hero-desktop-building.avif" />
-        <link rel="preload" as="image" href="/building-mask-mobile.avif" />
-        <link rel="preload" as="image" href="/hero-desktop-building.avif" />
-
         <meta name="robots" content="index, follow" />
         <meta
           name="viewport"
