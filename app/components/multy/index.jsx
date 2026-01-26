@@ -3,22 +3,22 @@ import React from "react";
 import Image from "next/image";
 import styles from "./styles.module.scss";
 import Building from "../svg-components/building-mobile";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 const Index = () => {
+  const container = React.useRef(null)
   const ref = React.useRef(null);
+  const isInView = useInView(ref, { root: container, once: true, margin: "-50px" });
   return (
-    <div className={styles.premium}>
-      <div className={styles.premium__inner} ref={ref}>
+    <div className={styles.premium} ref={ref}>
+      <div className={styles.premium__inner} >
         <div className={styles.premium__header_inner}>
           <div className={styles.premium__title_image}>
             <Building />
             <motion.div
               className="w-56 h-48 absolute bottom-16 left-16 translate-0 z-3"
-              initial={{ opacity: 1 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, ease: "easeOut" }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
+              transition={{ duration: 1, ease: "easeOut" }}
             >
               <Image
                 src="/building-2.webp"

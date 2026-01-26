@@ -16,7 +16,7 @@ html {
   }
 }
 body {
-  @apply w-full h-full relative mx-auto;
+  @apply w-full min-h-full relative mx-auto p-0 m-0 overflow-x-hidden;
 
   @supports (height: 100dvh) {
     :root {

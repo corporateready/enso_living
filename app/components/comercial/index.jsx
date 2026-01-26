@@ -4,21 +4,21 @@ import Image from "next/image";
 import styles from "./styles.module.scss";
 import Building from "../svg-components/building-mobile";
 import ButtonPaper from "../svg-components/ButtonPaper";
-import { motion } from "motion/react";
+import { motion, useInView } from "motion/react";
 
 const Index = ({ handlerFormOpen }) => {
-  const ref = React.useRef(null);
+  const container = React.useRef(null)
+    const ref = React.useRef(null);
+    const isInView = useInView(ref, { root: container, once: true, margin: "-50px" });
   return (
-    <div className={styles.premium}>
-      <div className={styles.premium__inner} ref={ref}>
+    <div className={styles.premium} ref={ref}>
+      <div className={styles.premium__inner} >
         <div className={styles.premium__header_inner}>
           <div className={styles.premium__title_image}>
             <Building />
             <motion.div
               className="w-[20rem] h-[12rem] absolute bottom-[4.5rem] right-[3rem] translate-0 z-3"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
+              animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, ease: "easeOut" }}
             >
               <Image
