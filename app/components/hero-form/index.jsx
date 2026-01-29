@@ -5,57 +5,42 @@ import Image from "next/image";
 import { useMediaQuery } from "react-responsive";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
-import { useRouter } from "next/navigation";
 import { motion } from "motion/react";
 
-export const HeroForm = ({ handlerFormOpen }) => {
-  const router = useRouter();
-
+export const HeroForm = ({
+  handlerFormOpen,
+  name,
+  email,
+  phone,
+  setPhone,
+  setName,
+  setEmail,
+  formSubmitTrack,
+}) => {
   const isMobile = useMediaQuery({
     query: "(max-width: 640px)",
   });
 
-  const [name, setName] = React.useState("");
-  const [email, setEmail] = React.useState("");
-  const [phone, setPhone] = React.useState("");
-  const [isFormSubmitted, setIsFormSubmitted] = React.useState(false);
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isHoveredButton, setIsHoveredButton] = React.useState(false);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
   };
-
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-
   const handleChangePhone = (value) => {
     let cleanedValue = value.replace(/^\+0+/, "+40");
     cleanedValue = cleanedValue.replace(/^\+400/, "+40");
 
     setPhone(cleanedValue);
   };
-
   React.useEffect(() => {
     if (name.length >= 3 && email.match("@") && phone.length >= 12) {
       setIsDisabled(true);
     }
   }, [name, email, phone, isDisabled]);
-
-  const formSubmitTrack = () => {
-    if (typeof window !== "undefined" && window.posthog)
-      window.posthog.capture("form_submitted", {
-        name: name,
-        phone: phone,
-        email: email,
-      });
-
-    if (!isFormSubmitted) {
-      setIsFormSubmitted(true);
-      router.push("/thank-you-ro");
-    }
-  };
 
   return (
     <div onClick={handlerFormOpen} className={styles.section}>
