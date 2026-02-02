@@ -11,8 +11,8 @@ const inter = Inter({
 });
 
 export const metadata = {
-  title: "ENSO LIVING",
-  description: "ENSO LIVING - Your home for sustainable living",
+  title: "Unicul penthouse triplex premium în Brașov | ENSŌ LIVING",
+  description: "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.",
   robots: {
     index: true,
     follow: true,
