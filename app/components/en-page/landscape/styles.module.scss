@@ -1,0 +1,18 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-auto relative z-0 bg-white sm:hidden;
+}
+.premium__inner_slider {
+    @apply w-full h-[710rem] relative z-1 overflow-hidden;
+}
+.slider__navigate {
+    @apply w-[68rem] h-[68rem] absolute bottom-[28rem] left-1/2 -translate-x-1/2 z-2;
+}
+.bottom__text_title {
+    @apply text-[30rem] text-black leading-[100%] pl-[25rem] mt-[80rem];
+    letter-spacing: -1.2rem;
+}
+.bottom__text_subtitle {
+    @apply text-[12rem] text-black leading-[125%] mt-[11rem] pr-[28rem] text-left flex justify-end;
+}

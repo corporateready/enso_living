@@ -1,0 +1,34 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-auto relative z-0 bg-white sm:hidden;
+}
+.premium__header_inner {
+    @apply flex justify-start items-end px-[24rem] gap-[24rem] pt-[114rem];
+}
+.premium__title_image {
+    @apply w-[80rem] h-[94rem] relative z-0;
+}
+.premium__title_content{
+    @apply flex flex-col gap-[11rem] ml-[-8rem]; 
+}
+.premium__title_text {
+    @apply text-black text-[27rem] leading-[100%];
+}
+.premium__title_description {
+    @apply text-black text-[12rem] leading-[125%];
+}
+.premium__content {
+    @apply px-[23rem] flex flex-col;
+}
+.premium__inner_image {
+    @apply w-full h-[500rem] relative z-1;
+}
+
+.hero__btn {
+    @apply w-full h-[68rem] text-white text-[20rem] leading-[100%] flex justify-end items-center gap-[37rem] rounded-full pr-[8rem] mt-[20rem];
+    background: linear-gradient(90deg,rgba(78, 78, 100, 1) 0%, rgba(177, 119, 98, 1) 80%);
+    .span__text {
+        @apply text-end;
+    }
+}

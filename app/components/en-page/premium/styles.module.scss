@@ -1,0 +1,51 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-full relative z-0 bg-[#463C37] sm:hidden;
+}
+.premium__header_inner {
+    @apply flex justify-start px-[24rem] gap-[30rem] pt-[39rem];
+}
+.premium__title_image {
+    @apply w-[80rem] h-[90rem] relative z-0 mt-[10rem];
+}
+.premium__title_content{
+    @apply flex flex-col gap-[11rem] ml-[-8rem]; 
+}
+.premium__title_text {
+    @apply text-white text-[30rem] leading-[100%];
+}
+.premium__title_description {
+    @apply text-white text-[12rem] leading-[125%];
+}
+.premium__content {
+    @apply px-[25rem] flex flex-col pb-[62rem];
+}
+.premium__inner_image {
+    @apply w-[380rem] h-[200rem] mt-[14rem] relative z-1 object-cover;
+    &::after {
+        content: "ENSŌ LIVING Business Center";
+        @apply inline-flex justify-center items-center absolute bottom-0 left-0 z-2 text-[12rem] text-white w-[192rem] h-[32rem];
+        background: linear-gradient(90deg,rgba(78, 78, 100, 1) 0%, rgba(177, 119, 98, 1) 80%);
+    }
+}
+// <===== items =====>
+.inner__list {
+    @apply mt-[5rem];
+}
+.inner__list_item {
+    @apply flex gap-[88rem] w-full border-b-[1rem] border-[#5A4C45] pt-[20rem] pb-[6rem];
+}
+.item__icon {}
+.item__text {
+    @apply text-[12rem] text-white leading-[116%];
+}
+.hero__btn {
+    @apply w-[380rem] h-[68rem] text-white text-[20rem] leading-[100%] flex justify-end items-center gap-[12rem] rounded-full pr-[8rem] bg-[#667761] mt-[18rem];
+    .span__text {
+        @apply text-end;
+    }
+    @media screen and (width >= 640px) {
+        @apply w-[462rem] h-[86rem] text-[26rem] top-[838rem] gap-[24rem] pr-[10rem];
+    }
+}

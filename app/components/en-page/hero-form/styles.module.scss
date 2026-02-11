@@ -1,0 +1,105 @@
+@reference "tailwindcss";
+.section {
+    @apply fixed top-0 left-0 z-3 w-full h-dvh bg-[#fff]/20;
+    @media screen and (width >= 640px) {
+        @apply fixed top-0 left-0 z-1 w-full h-full ;
+    }
+}
+.close__btn {
+    @apply absolute top-[20rem] right-[20rem] translate-0 z-6;
+    @media screen and (width >= 640px) {
+        @apply absolute top-[-44rem] right-0 translate-0 z-6 hover:cursor-pointer;
+    }
+}
+.inner {
+    @apply relative top-1/2 left-1/2 -translate-1/2 z-4 bg-white w-[380rem] h-auto p-0 flex flex-col gap-[20rem] pb-[34rem];
+    @media screen and (width >= 640px) {
+        @apply relative top-1/2 left-1/2 -translate-1/2 z-5 bg-white w-[1440rem] h-auto p-[50rem] pr-[50rem] flex-row gap-[55rem];
+    }
+    @media screen and (width >= 640px) and (height <= 700px) {
+        @apply scale-85;
+    }
+    @media screen and (width >= 1640px) and (height <= 810px) {
+        @apply scale-85;
+    }
+}
+.inner__image_mobile {
+    @apply relative z-0 inline-block w-full h-[324rem] sm:hidden;
+}
+.inner__image {
+    @apply hidden;
+    @media screen and (width >= 640px) {
+        @apply inline-block relative w-[600rem] h-[610rem];
+    }
+}
+.inner__content {
+    @media screen and (width >= 640px) {
+        @apply w-[685rem] h-[600rem];
+    }
+}
+.content__title_mobile {
+        @apply inline-block text-black text-[30rem] leading-[103%] -tracking-[1.5rem] absolute top-[202rem] left-0 z-2 ml-[30rem] w-full sm:hidden;
+}
+.content__title {
+    @apply hidden;
+    @media screen and (width >= 640px) {
+        @apply inline-block text-black text-[60rem] uppercase leading-[110%] -tracking-[3rem];
+    }
+}
+.content__subtitle {
+    @apply hidden;
+    @media screen and (width >= 640px) {
+        @apply w-full inline-flex justify-end text-black text-end text-[60rem] uppercase leading-[110%] -tracking-[3rem];
+    }
+}
+.form__submit {
+    @apply relative z-3 flex flex-col w-full gap-[14rem] mt-[-20rem] items-center px-[30rem];
+    @media screen and (width >= 640px) {
+        @apply flex flex-col w-full mt-[20rem] items-end px-0;
+    }
+    input {
+        @apply w-full placeholder:text-[16rem] placeholder:text-[#7D7F80] text-[#7D7F80] text-[16rem] bg-[#FAF9F8] py-[20rem] pl-[40rem] border-b-[1px] border-black focus:outline-none;
+        @media screen and (width >= 640px) {
+            @apply w-full placeholder:text-[18rem] text-[#7D7F80] text-[18rem] bg-[#FAF9F8] py-[20rem] pl-[50rem];
+        }
+    }
+}
+.phone__input {
+    @apply w-full relative z-3 bg-[#faf9f8] p-0;
+  
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: 4;
+      top: 0;
+      left: 48rem;
+      width: 0rem;
+      height: 100%;
+      background: #000;
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      z-index: 4;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background: #000;
+    }
+
+    @media screen and (width >= 640px) {
+      @apply h-full w-full;
+    }
+  }
+.offer__btn {
+    @apply w-full h-[57rem] text-white text-[14.5rem] leading-[100%] flex justify-end items-center gap-[6rem] rounded-full pr-[8rem] bg-[#667761] mt-[12rem];
+    .span__text {
+        @apply text-end;
+    }
+    @media screen and (width >= 640px) {
+        @apply w-[580rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[18rem] rounded-full pr-[10rem] bg-[#667761] mt-[10rem] cursor-pointer transition-all duration-200 disabled:cursor-default;
+    }
+
+}

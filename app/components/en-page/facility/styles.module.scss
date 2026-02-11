@@ -1,0 +1,48 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-full h-auto relative z-0 bg-[#463C37] sm:hidden;
+}
+.premium__header_inner {
+    @apply flex justify-start items-end px-[24rem] gap-[14rem] pt-[122rem];
+}
+.premium__title_image {
+    @apply w-[80rem] h-[110rem] relative z-0;
+}
+.premium__title_content{
+    @apply flex flex-col gap-[8rem]; 
+}
+.premium__title_text {
+    @apply text-white text-[30rem] leading-[100%];
+}
+.premium__title_description {
+    @apply text-white text-[12rem] leading-[106%] mb-[-5rem] ml-[3rem];
+}
+.premium__content {
+    @apply px-[23rem] flex flex-col;
+}
+.premium__inner_image {
+    @apply w-full h-[412rem] mt-[26rem] relative z-1;
+}
+// <===== items =====>
+.inner__list {
+    @apply mt-[2rem];
+}
+.inner__list_item__up {
+    @apply flex gap-[145rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[10rem] overflow-y-hidden;
+}
+.inner__list_item {
+    @apply flex gap-[155rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[8rem] overflow-y-hidden;
+}
+.inner__list_item__b {
+    @apply flex gap-[78rem] items-end w-full border-b-[1rem] border-[#5A4C45] pt-[19rem] pb-[8rem] pl-[79rem] leading-[115%] overflow-y-hidden;
+}
+.item__number {
+    @apply text-white text-[70rem] leading-[35%];
+}
+.item__text {
+    @apply text-[12rem] text-white leading-[110%];
+}
+.item__text_med {
+    @apply text-[12rem] text-white leading-[125%];
+}

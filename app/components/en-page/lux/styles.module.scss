@@ -1,0 +1,4 @@
+@reference "tailwindcss";
+.section {
+    @apply hidden sm:block w-full h-[1068rem] relative z-0 overflow-hidden;
+}

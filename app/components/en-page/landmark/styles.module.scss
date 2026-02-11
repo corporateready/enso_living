@@ -1,0 +1,32 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply block w-dvw h-auto relative z-0 bg-[#463C37] pt-[50rem] sm:hidden;
+}
+.premium__inner_image {
+    @apply w-full h-[752rem] relative z-1 overflow-hidden;
+}
+.top__text {
+    @apply w-fit inline-block absolute -top-24 left-1/2 -translate-x-1/2 z-1 text-[53rem] text-white leading-[97%] uppercase whitespace-nowrap;
+}
+.bottom__text {
+    @apply w-fit absolute bottom-[-6rem] left-1/2 -translate-x-1/2 z-1 text-[53rem] text-white leading-[90%] uppercase whitespace-nowrap tracking-[-0.03em];
+}
+.text__1 {
+    // @apply tracking-[-0.01em];   
+    // letter-spacing: -0.025em
+}
+.text__2 {
+    // @apply ml-[90rem];
+    // letter-spacing: 0.1em
+}
+.text__3 {
+    // @apply w-full ml-[184rem];
+}
+.text__4 {
+    // @apply ml-[110rem];
+    // letter-spacing: -0.03em
+}
+.text__5 {
+    @apply inline-block w-full text-end m-0 p-0;
+}

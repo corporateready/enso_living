@@ -1,4 +1,4 @@
-// "use client";
+"use client";
 import React from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
@@ -6,12 +6,11 @@ import { useRouter } from "next/navigation";
 
 const Index = () => {
   const router = useRouter();
-
-  const [isOpenLanguage, setIsOpenLanguage] = React.useState(false)
-  const handleBack = () => {
-    router.back();
-  };
-  console.log("is active ", isOpenLanguage)
+  
+    const [isOpenLanguage, setIsOpenLanguage] = React.useState(false)
+    const handleBack = () => {
+      router.back();
+    };
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -87,20 +86,20 @@ const Index = () => {
             </svg>
           </span>
         </button>
-        <div className="flex gap-[6rem] relative z-0">
+       <div className="flex gap-[6rem] relative z-0">
           <button
             type="button"
             aria-label="select language"
             className={!isOpenLanguage ? "w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase": ""}
             onClick={() => setIsOpenLanguage(!isOpenLanguage)}
           >
-            <span>ro</span>
+            <span>en</span>
             {
               isOpenLanguage ? <span className="inline-flex flex-col relative after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 after:w-[40rem] after:h-[0.6px] after:bg-[#D9D9D9]">
               <span className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-t-full flex justify-center items-center text-white text-[18rem] uppercase"
               onClick={() => setIsOpenLanguage(!isOpenLanguage)}
-              >ro</span> 
-              <Link href={"/en"} className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-b-full flex justify-center items-center text-white text-[18rem] uppercase">en</Link>
+              >en</span>
+              <Link href={"/"} className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-b-full flex justify-center items-center text-white text-[18rem] uppercase">ro</Link>
             </span> : <span></span>
             }
           </button>

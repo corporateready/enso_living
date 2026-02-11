@@ -1,0 +1,4 @@
+@reference "tailwindcss";
+.section {
+    @apply hidden sm:block w-full h-auto bg-[#463C37];
+}

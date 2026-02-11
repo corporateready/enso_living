@@ -1,0 +1,55 @@
+@reference "tailwindcss";
+.hero {
+    @apply w-full h-[796rem] relative z-0;
+    @media screen and (width >= 640px) {
+        @apply h-[1067rem] relative z-0;
+    }
+}
+
+.title {
+    @apply text-white text-[66rem] uppercase font-normal leading-[91%] absolute top-[114rem] left-0 z-2 translate-x-0 pl-[20rem] -tracking-[0.05em];
+    @media screen and (width >= 640px) {
+        @apply text-[160rem] absolute top-[168rem] left-[196rem] leading-[92%] z-1;
+        letter-spacing: -10rem;
+        transform: none;
+    }
+}
+.hero__text_decor {
+    @apply text-[16rem] text-white/60 leading-[120%] absolute top-[236rem] right-[22rem] translate-0 z-3;
+    letter-spacing: 0.2rem;
+    @media screen and (width >= 640px) {
+        @apply text-[60rem] top-[612rem] right-[940rem];
+        letter-spacing: normal;
+    }
+}
+.text__building_high {
+    @apply text-[10rem] text-white font-normal leading-[120%] absolute top-[318rem] left-[52rem] translate-0 z-3;
+    @media screen and (width >= 640px) {
+        @apply text-[18rem] top-[180rem] left-[1496rem];
+    }
+}
+.text__building_low {
+    @apply text-[10rem] text-white font-normal leading-[120%] absolute top-[574rem] left-[25rem] translate-0 z-3;
+    @media screen and (width >= 640px) {
+        @apply text-[18rem] top-[760rem] left-[1562rem] text-justify;
+    }
+}
+.text__building_middle {
+    @apply text-[10rem] text-white font-normal leading-[120%] absolute top-[398rem] right-[27rem] translate-0 z-3 text-right;
+    @media screen and (width >= 640px) {
+        @apply text-[18rem] top-[400rem] right-[350rem] text-left;
+    }
+}
+.hero__btn {
+    @apply w-[362rem] h-[68rem] text-white text-[17rem] leading-[127%] flex justify-end items-center gap-[14rem] relative top-[674rem] left-1/2 -translate-1/2 z-3 overflow-hidden rounded-full pr-[6rem] hover:cursor-pointer tracking-[0.2rem];
+    background: linear-gradient(90deg,rgba(78, 78, 100, 0.7) 0%, rgba(177, 119, 98, 0.7) 80%);
+    .span__blur {
+        @apply absolute top-0 left-0 z-4 inset-0 backdrop-blur-[2.5rem];
+    }
+    .span__text {
+        @apply relative z-5;
+    }
+    @media screen and (width >= 640px) {
+        @apply w-[520rem] h-[86rem] text-[26rem] top-[848rem] gap-[20rem] pr-[10rem];
+    }
+}

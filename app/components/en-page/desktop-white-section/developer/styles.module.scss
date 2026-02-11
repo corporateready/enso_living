@@ -1,0 +1,22 @@
+@reference "tailwindcss";
+
+.premium {
+    @apply hidden sm:block w-full h-[1000rem] relative z-0;
+    background: linear-gradient(180deg,rgba(177, 119, 98, 1) 0%, rgba(78, 78, 100, 1) 100%);
+}
+.premium__inner{
+    @apply w-[1450rem] h-full flex justify-between relative z-1 mx-auto pt-[178rem] overflow-hidden;
+}
+.title {
+    @apply text-[80rem] text-white relative z-0 leading-[120%];
+    letter-spacing: -5%;
+}
+.description {
+    @apply w-full flex flex-col relative z-1 text-[26rem] text-white leading-[120%] mt-[82rem];
+}
+.description__b {
+    @apply w-full flex flex-col relative z-1 text-[26rem] text-white leading-[120%] mt-[48rem];
+}
+.inner__logo {
+    @apply w-[340rem] h-[440rem] mt-[126rem] relative z-1;
+}
