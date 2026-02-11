@@ -21,6 +21,9 @@
         @apply w-[1440rem] mx-auto p-0 pt-[50rem];
     }
 }
+.header__logo {
+    @apply w-[118rem] h-[47rem] sm:w-auto sm:h-auto  bg-[#D9D9D9]/20 inline-flex justify-center items-center rounded-full relative z-1 sm:bg-transparent;
+}
 .footer {
     @apply w-full h-auto bg-[#645762] p-0 m-0;
 }
@@ -48,10 +51,10 @@
     }
 }
 .content__links {
-    @apply flex justify-between text-[10rem] text-white/60 leading-[100%] underline;
+    @apply flex gap-[34rem] text-[10rem] text-white/60 leading-[100%] underline;
     letter-spacing: 0.4rem;
     @media screen and (width >= 640px) {
-        @apply text-[16rem] mt-[14rem];
+        @apply flex gap-[46rem] text-[16rem] mt-[14rem];
         text-decoration: none;
         letter-spacing: 0rem;
     }

@@ -119,7 +119,7 @@ export default function Home() {
 
     if (!isFormSubmitted) {
       setIsFormSubmitted(true);
-      router.push("/thank-you-ro");
+      router.push("/thank-you-en");
     }
   };
 

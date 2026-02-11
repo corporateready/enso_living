@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const page = () => {
+  const [isOpenLanguage, setIsOpenLanguage] = React.useState(false)
   return (
     <div className={styles.thanks_overflow}>
       <Image
@@ -22,7 +23,7 @@ const page = () => {
       <div className={styles.thanks}>
         <header className={styles.header}>
           <div className={styles.header__inner}>
-            <Link href={"/"} className={styles.header__logo}>
+            <Link href={"/"}>
                 <svg
                   className="w-[90rem] h-[30rem] sm:w-[150rem] sm:h-[50rem]"
                   viewBox="0 0 149 50"
@@ -88,11 +89,35 @@ const page = () => {
                 </svg>
             </Link>
             <div className="flex gap-[17rem]">
-              <button
+               <button
                 type="button"
-                className="w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase"
+                aria-label="select language"
+                className={
+                  !isOpenLanguage
+                    ? "relative w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase hover:cursor-pointer"
+                    : ""
+                }
+                onClick={() => setIsOpenLanguage(!isOpenLanguage)}
               >
-                ro
+                <span>ro</span>
+                {isOpenLanguage ? (
+                  <span className="inline-flex flex-col relative top-0 left-0 z-0 after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 after:w-[40rem] after:h-[0.6px] after:bg-[#D9D9D9] hover:cursor-pointer">
+                    <span
+                      className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-t-full flex justify-center items-center text-white text-[18rem] uppercase"
+                      onClick={() => setIsOpenLanguage(!isOpenLanguage)}
+                    >
+                      ro
+                    </span>
+                    <Link
+                      href={"/thank-you-en"}
+                      className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-b-full flex justify-center items-center text-white text-[18rem] uppercase"
+                    >
+                      en
+                    </Link>
+                  </span>
+                ) : (
+                  <span></span>
+                )}
               </button>
               
               <Link
