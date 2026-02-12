@@ -72,7 +72,7 @@ const Hero = ({ handlerFormOpen }) => {
             y: 0,
             transition: { duration: 0.5, delay: 0 },
           }}
-          className="sm:inline-flex text-right ml-[55rem]"
+          className="sm:inline-flex text-right ml-[55rem] sm:ml-0"
         >
           EXCLUSIVE
         </motion.span>
