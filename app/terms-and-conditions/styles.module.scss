@@ -2,13 +2,13 @@
 
 .terms {
   @apply bg-[#ffffff] w-full h-auto relative z-0 flex flex-col pb-[30rem];
-  font-family: "Montserrat", sans-serif;
+  // font-family: "Inter", sans-serif;
 }
 .container {
   @apply w-full h-full mx-auto px-[20rem];
 
-  @media screen and (width >= 640px) {
-    @apply w-[1200rem] px-0;
+  @media screen and (min-width: 640px) {
+    @apply w-[1400rem] px-0;
   }
 }
 .terms__content {
@@ -16,28 +16,30 @@
 }
 .headLine__title {
   @apply text-[14rem] font-bold mb-[10rem];
-  @media screen and (width >= 640px) {
-    @apply text-[18rem] ;
+  @media screen and (min-width: 640px) {
+    @apply text-[26rem] ;
   }
-  @media screen and (width >= 1920px) {
-    @apply text-[18px] mb-[10px];
+  @media screen and (min-width: 1920px) {
+    @apply text-[26px] mb-[10px];
   }
 }
 .title {
   @apply text-[14rem] font-bold mb-[10rem];
-  @media screen and (width >= 640px) {
-    @apply text-[16rem];
+  
+  @media screen and (min-width: 640px) {
+    @apply text-[24rem];
   }
-  @media screen and (width >= 1920px) {
-    @apply text-[16px];
+  @media screen and (min-width: 1920px) {
+    @apply text-[24px];
   }
 }
 .description {
   @apply text-[12rem] font-medium leading-[120%] mb-[10rem];
-  @media screen and (width >= 640px) {
-    @apply text-[14rem];
+
+  @media screen and (min-width: 640px) {
+    @apply text-[20rem];
   }
-  @media screen and (width >= 1920px) {
-    @apply text-[14px];
+  @media screen and (min-width: 1920px) {
+    @apply text-[20px];
   }
 }

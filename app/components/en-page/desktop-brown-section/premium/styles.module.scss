@@ -58,7 +58,7 @@
     @apply text-[26rem] text-white leading-[115%];
 }
 .offer__btn {
-    @apply w-[490rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] bg-[#667761] mt-[26rem] hover:cursor-pointer;
+    @apply w-[490rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[20rem] rounded-full pr-[10rem] bg-[#667761] mt-[20rem] hover:cursor-pointer;
     .span__text {
         @apply text-end;
     }

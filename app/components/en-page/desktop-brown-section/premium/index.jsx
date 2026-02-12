@@ -34,7 +34,7 @@ const Index = ({ handlerFormOpen }) => {
               >
                 Premium offices
                 <br />for lease
-                <br />in ENSŌ LIVING {""}
+                <span className="inline-block mt-[10rem]">in ENSŌ LIVING</span>
                 <br />
                 Business Center
               </motion.p>

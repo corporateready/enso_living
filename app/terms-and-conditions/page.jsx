@@ -1,15 +1,14 @@
-"use client";
 import React from "react";
 import styles from "./styles.module.scss";
 import Header from "../components/terms-privacy-header"
-const Page = () => {
 
+const Page = () => {
   return (
     <div className={styles.terms}>
       <Header />
       <div className={styles.container}>
         <div className={styles.terms__content}>
-          <p className={styles.headLine__title}>Terms and Conditions</p>
+          <p className={`${styles.headLine__title} text-[40px]`}>Terms and Conditions</p>
           <p className={styles.description}>Welcome to ENSO LIVING</p>
           <p className={styles.description}>
             These terms and conditions outline the rules and regulations for the
