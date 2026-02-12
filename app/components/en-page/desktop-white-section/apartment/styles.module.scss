@@ -8,16 +8,7 @@
     flex-direction: row-reverse
 }
 .inner {
-    @apply w-[1420rem] h-full flex pt-[212rem] mr-0 pb-[148rem];
-}
-.rightside__line {
-@apply w-[340rem] h-auto bg-[#667761] relative z-0;
-}
-.rightside__decor {
-    @apply inline-flex absolute top-0 left-0 z-1 w-full h-full;
-}
-.rightside__image {
-    @apply w-[246rem] h-[240rem] relative top-0 left-0 translate-0 z-1 mt-[185rem] mx-auto;
+    @apply w-[1420rem] h-full flex pt-[195rem] mr-0 pb-[148rem];
 }
 .inner__header {
     @apply flex justify-start gap-[20rem];
@@ -35,10 +26,20 @@
     @apply text-black text-[26rem] leading-[118%] mt-[15rem] pl-[4rem];
 }
 .offer__btn {
-    @apply w-[400rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[40rem] rounded-full pr-[10rem] mt-[360rem] hover:cursor-pointer;
+    @apply w-[400rem] h-[80rem] text-white text-[26rem] leading-[100%] flex justify-end items-center gap-[40rem] rounded-full pr-[10rem] mt-[332rem] hover:cursor-pointer;
     background: linear-gradient(90deg,rgba(78, 78, 100, 0.9) 0%, rgba(177, 119, 98, 0.9) 80%);
     .span__text {
         @apply text-end;
     }
 
+}
+// Right line
+.rightside__line {
+@apply w-[340rem] h-auto bg-[#667761] relative z-0;
+}
+.rightside__decor {
+    @apply inline-flex absolute top-0 left-0 z-1 w-full h-full;
+}
+.rightside__image {
+    @apply w-[246rem] h-[240rem] relative top-0 left-0 translate-0 z-1 mt-[185rem] mx-auto;
 }

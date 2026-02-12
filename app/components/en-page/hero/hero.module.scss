@@ -7,7 +7,7 @@
 }
 
 .title {
-    @apply text-white text-[66rem] uppercase font-normal leading-[91%] absolute top-[114rem] left-0 z-2 translate-x-0 pl-[20rem] -tracking-[0.05em];
+    @apply text-white text-[66rem] uppercase font-normal leading-[91%] absolute top-[114rem] left-0 z-2 translate-x-0 pl-[20rem] -tracking-[0.055em];
     @media screen and (width >= 640px) {
         @apply text-[160rem] absolute top-[168rem] left-[196rem] leading-[92%] z-1;
         letter-spacing: -10rem;
@@ -15,7 +15,7 @@
     }
 }
 .hero__text_decor {
-    @apply text-[16rem] text-white/60 leading-[120%] absolute top-[236rem] right-[22rem] translate-0 z-3;
+    @apply text-[16rem] text-white/60 leading-[120%] absolute top-[236rem] right-[24rem] translate-0 z-3;
     letter-spacing: 0.2rem;
     @media screen and (width >= 640px) {
         @apply text-[60rem] top-[612rem] right-[940rem];
@@ -35,7 +35,7 @@
     }
 }
 .text__building_middle {
-    @apply text-[10rem] text-white font-normal leading-[120%] absolute top-[398rem] right-[27rem] translate-0 z-3 text-right;
+    @apply text-[10rem] text-white font-normal leading-[120%] absolute top-[388rem] right-[25rem] translate-0 z-3 text-right;
     @media screen and (width >= 640px) {
         @apply text-[18rem] top-[400rem] right-[350rem] text-left;
     }

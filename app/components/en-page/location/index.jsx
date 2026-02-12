@@ -404,7 +404,6 @@ const Index = ({ handlerFormOpen }) => {
           </linearGradient>
         </defs>
       </svg>
-
       <Enso />
       <Carrefour />
       <Kaufland />

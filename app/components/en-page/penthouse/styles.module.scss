@@ -26,6 +26,10 @@
 }
 .inner__list_item {
     @apply flex items-start gap-[88rem] w-full h-auto border-b-[1px] border-[#000] pt-[20rem] pb-[10rem];
+
+    &:nth-child(2) {
+        @apply gap-[82rem]
+    }
 }
 .inner__list {
     // @apply ;
