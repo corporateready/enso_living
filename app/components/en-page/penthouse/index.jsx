@@ -42,7 +42,7 @@ const Index = ({ handlerFormOpen }) => {
               transition={{ duration: 0.5, ease: "easeOut" }}
               className={styles.premium__title_text}
             >
-              Triplex Ptenthouse
+              Triplex Penthouse
             </motion.p>
             <motion.p
               initial={{ opacity: 0 }}
