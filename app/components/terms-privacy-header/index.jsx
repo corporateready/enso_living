@@ -20,11 +20,8 @@ const Page = () => {
                 src="/Enso-Living-tansparent.avif"
                 fill
                 alt="Botanica Avenew gray logo"
-                className={styles.logo}
               />
-
             </div>
-
             <div className="relative z-0">
             <Link href={"tel:"} className={styles.header__phone}></Link>
             <svg
