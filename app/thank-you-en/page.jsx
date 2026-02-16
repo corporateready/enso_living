@@ -90,18 +90,15 @@ const page = () => {
               </svg>
             </Link>
             <div className="flex gap-[17rem]">
-              <button
+              <Link
+                href={"/thank-you-ro"}
                 type="button"
                 aria-label="select language"
-                className={
-                  !isOpenLanguage
-                    ? "w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase hover:cursor-pointer relative"
-                    : ""
-                }
+                className="w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase hover:cursor-pointer relative"
                 onClick={() => setIsOpenLanguage(!isOpenLanguage)}
               >
-                <span>en</span>
-                {isOpenLanguage ? (
+                <span>ro</span>
+                {/* {isOpenLanguage ? (
                   <span className="inline-flex flex-col relative after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 after:w-[40rem] after:h-[0.6px] after:bg-[#D9D9D9]">
                     <span
                       className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-t-full flex justify-center items-center text-white text-[18rem] uppercase"
@@ -118,8 +115,8 @@ const page = () => {
                   </span>
                 ) : (
                   <span></span>
-                )}
-              </button>
+                )} */}
+              </Link>
 
               <Link href="tel:" className={styles.thanks__header_phone}></Link>
               <svg

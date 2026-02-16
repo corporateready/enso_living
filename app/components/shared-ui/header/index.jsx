@@ -88,22 +88,23 @@ const Index = () => {
           </span>
         </button>
         <div className="flex gap-[6rem] relative z-0">
-          <button
-            type="button"
-            aria-label="select language"
-            className={!isOpenLanguage ? "w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase": ""}
+          <Link
+          href="/en"
+            // type="button"
+            // aria-label="select language"
+            className="w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase hover:cursor-pointer"
             onClick={() => setIsOpenLanguage(!isOpenLanguage)}
           >
-            <span>ro</span>
-            {
+            <span>en</span>
+            {/* {
               isOpenLanguage ? <span className="inline-flex flex-col relative after:content-[''] after:absolute after:top-1/2 after:left-1/2 after:-translate-1/2 after:w-[40rem] after:h-[0.6px] after:bg-[#D9D9D9]">
               <span className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-t-full flex justify-center items-center text-white text-[18rem] uppercase"
               onClick={() => setIsOpenLanguage(!isOpenLanguage)}
               >ro</span> 
               <Link href={"/en"} className="w-[45rem] h-[44rem] bg-[#d9d9d9]/20 rounded-b-full flex justify-center items-center text-white text-[18rem] uppercase">en</Link>
             </span> : <span></span>
-            }
-          </button>
+            } */}
+          </Link>
           <Link href={"tel:"} className={styles.header__phone}></Link>
           <svg
             className="w-[24rem] h-[24rem] inline-block absolute top-[10rem] right-[11rem] translate-0 z-[-1] sm:w-0"
