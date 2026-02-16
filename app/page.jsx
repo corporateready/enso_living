@@ -143,7 +143,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center overflow-x-hidden relative z-0">
+    <div className="flex min-h-screen w-dvw flex-col items-center justify-center overflow-x-hidden relative z-0">
       <Header />
       <main className="w-full h-full">
         <Hero handlerFormOpen={handlerFormOpen} />
