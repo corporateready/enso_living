@@ -174,7 +174,7 @@ const page = () => {
                 <Link
                   href={"tel:+"}
                   className={styles.thanks__footer_phone}
-                >62131441234512</Link>
+                ></Link>
                 <Link
                   href={
                     "https://www.facebook.com/profile.php?id=61580179168995"
