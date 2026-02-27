@@ -1,0 +1,27 @@
+@reference "tailwindcss";
+
+.brush_stroke {
+    width: 245rem;
+    height: 240rem; 
+    background: none;
+    fill: none;
+    stroke: white;
+    stroke-width: 20;
+    stroke-linecap: round;
+    stroke-dasharray: 226;
+    stroke-dashoffset: 226;
+    animation: drawBrush 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+}
+
+@keyframes drawBrush {
+    0% {
+        stroke-dashoffset: 226;
+    }
+
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+.enso_symbol {
+            fill: #ffffff;
+        }

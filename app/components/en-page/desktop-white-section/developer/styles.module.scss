@@ -1,7 +1,7 @@
 @reference "tailwindcss";
 
 .premium {
-    @apply hidden sm:block w-full h-[1000rem] relative z-0;
+    @apply hidden sm:block w-full h-[1016rem] relative z-0;
     background: linear-gradient(180deg,rgba(177, 119, 98, 1) 0%, rgba(78, 78, 100, 1) 100%);
 }
 .premium__inner{

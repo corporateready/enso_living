@@ -11,7 +11,7 @@
     @apply px-[25rem];
 }
 .title {
-    @apply w-full flex flex-col relative z-1 text-[30rem] text-white leading-[110%] mt-[84rem] pb-[18rem];
+    @apply w-full flex flex-col relative z-1 text-[30rem] text-white leading-[110%] mt-[80rem] pb-[18rem];
     letter-spacing: -1rem;
 }
 .description {
@@ -21,7 +21,7 @@
     @apply w-[170rem] h-[220rem] relative top-[82rem] left-1/2 -translate-x-1/2 z-1;
 }
 .bottom__text_title {
-    @apply relative z-1 text-[30rem] text-black leading-[100%] mt-[236rem];
+    @apply relative z-1 text-[30rem] text-black leading-[100%] mt-[256rem];
     letter-spacing: -1.4rem;
 }
 .bottom__text_subtitle {

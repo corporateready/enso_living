@@ -11,14 +11,11 @@
     @apply px-[25rem];
 }
 .title {
-    @apply w-full flex flex-col relative z-1 text-[30rem] text-white leading-[100%] mt-[78rem] pb-[26rem];
+    @apply w-full flex flex-col relative z-1 text-[30rem] text-white leading-[100%] mt-[82rem] pb-[26rem];
     letter-spacing: -0.04em;
 }
 .description {
     @apply w-full flex flex-col relative z-1 text-[12rem] text-white leading-[124%] mt-[18rem];
-}
-.inner__logo {
-    @apply w-[170rem] h-[220rem] relative top-[82rem] left-1/2 -translate-x-1/2 z-1;
 }
 .bottom__text_title {
     @apply relative z-1 text-[30rem] text-black leading-[100%] mt-[236rem];
