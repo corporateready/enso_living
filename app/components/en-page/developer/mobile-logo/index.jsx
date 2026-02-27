@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import { motion } from "motion/react";
 
 const transition = {
-  duration: 4,
+  duration: 2,
   repeat: false,
   repeatType: "reverse",
   ease: "easeInOut",
@@ -183,14 +183,14 @@ export const Logo = () => {
       />
     </motion.svg>,
   ];
-  const letterVariants = {
-    hidden: { opacity: 0, y: 20 },
+ const letterVariants = {
+    hidden: { opacity: 0, y: 10 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.5 + i * 0.1,
-        duration: 0.5,
+        delay: 0.3 + i * 0.1,
+        duration: 0.3,
       },
     }),
   };

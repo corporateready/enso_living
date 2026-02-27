@@ -10,7 +10,7 @@
     stroke-linecap: round;
     stroke-dasharray: 226;
     stroke-dashoffset: 226;
-    animation: drawBrush 1s cubic-bezier(0.7, 0, 0.3, 1) forwards;
+    animation: drawBrush 1s cubic-bezier(0.5, 0, 0.1, 1) forwards;
 }
 
 @keyframes drawBrush {
