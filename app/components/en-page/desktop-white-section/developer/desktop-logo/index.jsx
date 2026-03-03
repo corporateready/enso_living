@@ -212,7 +212,7 @@ export const Logo = () => {
       <motion.svg
         initial="hidden"
         whileInView={loaded && "visible"}
-        viewport={{ once: false }}
+        viewport={{ once: true }}
         className="w-full h-full absolute top-0 left-0"
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 226.77 226.77"
@@ -234,7 +234,7 @@ export const Logo = () => {
                 visible: {
                   pathLength: 1,
                   transition: {
-                    duration: 1,
+                    duration: 0.8,
                     ease: "easeInOut",
                   },
                   transform: "translateZ(0)",
@@ -254,43 +254,43 @@ export const Logo = () => {
         )}
       </motion.svg>
 
-      <span className="relative flex justify-center items-end gap-[20rem] w-auto h-auto bg-none mt-[282rem]">
+      <div className="relative flex justify-center items-end gap-[20rem] w-auto h-auto bg-none mt-[282rem]">
         {ensoLtrs.map((letter, index) => (
-          <motion.span
+          <motion.div
             key={index}
             custom={index}
             variants={ensoLetterVariants}
             initial="hidden"
             whileInView={loaded && "visible"}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             style={{
               transform: "translateZ(0)",
               willChange: "transform, opacity",
             }}
           >
             {letter}
-          </motion.span>
+          </motion.div>
         ))}
-      </span>
+      </div>
 
-      <span className="relative flex justify-center items-end gap-[9rem] w-auto h-auto bg-none">
+      <div className="relative flex justify-center items-end gap-[9rem] w-auto h-auto bg-none">
         {developmentLtrs.map((letter, index) => (
-          <motion.span
+          <motion.div
             key={index}
             custom={index}
             variants={developmentLetterVariants}
             initial="hidden"
             whileInView={loaded && "visible"}
-            viewport={{ once: false }}
+            viewport={{ once: true }}
             style={{
               transform: "translateZ(0)",
               willChange: "transform, opacity",
             }}
           >
             {letter}
-          </motion.span>
+          </motion.div>
         ))}
-      </span>
+      </div>
     </div>
   );
 };
