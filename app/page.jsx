@@ -159,7 +159,7 @@ export default function Home() {
           <Landmark />
           <Penthouse handlerFormOpen={handlerFormOpen} />
           <Duplex handlerFormOpen={handlerFormOpen} />
-          <Apartment handlerFormOpen={handlerFormOpen} />
+          <Apartment handlerFormOpen={handlerFormOpen} /> 
           <Design />
           <Develolper />
           <Landscape />
