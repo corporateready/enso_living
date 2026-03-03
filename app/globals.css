@@ -1,6 +1,21 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Mignon";
+  src: url("/fonts/Mignon-Regular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  display: "swap";
+}
+@font-face {
+  font-family: "Mignon";
+  src: url("/fonts/Mignon-Semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  display: "swap";
+}
+
 :root {
   --app-height: 100vh;
 }
