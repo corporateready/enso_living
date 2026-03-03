@@ -13,11 +13,19 @@ export const Logo = () => {
       return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
-  const ensoLtrs = [
-    "e","n","s","o"
-  ];
+  const ensoLtrs = ["e", "n", "s", "o"];
   const developmentLtrs = [
-    "d", "e","v","e","l","o","p","m","e","n","t"
+    "d",
+    "e",
+    "v",
+    "e",
+    "l",
+    "o",
+    "p",
+    "m",
+    "e",
+    "n",
+    "t",
   ];
   const ensoLetterVariants = {
     hidden: { opacity: 0, y: 10 },
@@ -94,47 +102,56 @@ export const Logo = () => {
       </motion.svg>
 
       <div className="relative flex justify-center items-end gap-[10rem] w-auto h-auto bg-none mt-[274rem]">
-        {
-          ensoLtrs.map((letter, index) => (
-            <motion.div
-              key={index}
-              custom={index}
-              variants={ensoLetterVariants}
-              initial="hidden"
-              whileInView={loaded && "visible"}
-              viewport={{ once: false }}
-              className="text-[58rem] text-white uppercase"
-              style={{
-                fontFamily: "Mignon",
-                transform: "translateZ(0)",
-                willChange: "transform, opacity",
-              }}
-            >
-              {letter}
-            </motion.div>
-          ))}
+        {ensoLtrs.map((letter, index) => (
+          <motion.div
+            key={index}
+            custom={index}
+            variants={ensoLetterVariants}
+            initial="hidden"
+            whileInView={loaded && "visible"}
+            viewport={{ once: true }}
+            className="text-[58rem] text-white uppercase"
+            style={{
+              fontFamily: "Mignon",
+              transform: "translateZ(0)",
+              willChange: "transform, opacity",
+            }}
+          >
+            {letter}
+          </motion.div>
+        ))}
       </div>
 
-      <div className="relative flex justify-center items-end gap-[4rem] w-auto h-auto bg-none mt-[-12rem]">
-        {
-          developmentLtrs.map((letter, index) => (
-            <motion.span
-              key={index}
-              custom={index}
-              variants={developmentLetterVariants}
-              initial="hidden"
-              whileInView={loaded && "visible"}
-              viewport={{ once: false }}
-              className="text-[14rem] text-white font-semibold uppercase"
-              style={{
-                fontFamily: "Mignon",
-                transform: "translateZ(0)",
-                willChange: "transform, opacity",
-              }}
-            >
-              {letter}
-            </motion.span>
-          ))}
+      <div className="relative flex justify-center items-end gap-[4rem] w-auto h-auto bg-none mt-[-12rem] relative z-0">
+        {developmentLtrs.map((letter, index) => (
+          <motion.span
+            key={index}
+            custom={index}
+            variants={developmentLetterVariants}
+            initial="hidden"
+            whileInView={loaded && "visible"}
+            viewport={{ once: true }}
+            className="text-[14rem] text-white font-semibold uppercase"
+            style={{
+              fontFamily: "Mignon",
+              transform: "translateZ(0)",
+              willChange: "transform, opacity",
+            }}
+          >
+            {letter}
+          </motion.span>
+        ))}
+        {loaded ? (
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 2.5, duration: 1.5 }}
+            viewport={{ once: true }}
+            className="after:content-[''] after:absolute after:top-[-68rem] after:right-[-3rem] after:translate-0 after:w-[17rem] after:h-[3rem] after:bg-white"
+          ></motion.span>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );
