@@ -173,14 +173,25 @@ export const Logo = () => {
       />
     </motion.svg>,
   ];
-  const letterVariants = {
+  const ensoLetterVariants = {
     hidden: { opacity: 0, y: 10 },
     visible: (i) => ({
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.2 + i * 0.1,
-        duration: 0.2,
+        delay: 0.8 + i * 0.1,
+        duration: 0.5,
+      },
+    }),
+  };
+   const developmentLetterVariants = {
+    hidden: { opacity: 0, y: 10 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 1.3 + i * 0.1,
+        duration: 0.3,
       },
     }),
   };
@@ -216,7 +227,7 @@ export const Logo = () => {
                 visible: {
                   pathLength: 1,
                   transition: {
-                    duration: 1.8,
+                    duration: 1,
                     ease: "easeInOut",
                   },
                   transform: "translateZ(0)",
@@ -239,7 +250,7 @@ export const Logo = () => {
           <motion.span
             key={index}
             custom={index}
-            variants={letterVariants}
+            variants={ensoLetterVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
@@ -258,7 +269,7 @@ export const Logo = () => {
           <motion.span
             key={index}
             custom={index}
-            variants={letterVariants}
+            variants={developmentLetterVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: false }}
