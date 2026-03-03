@@ -1,5 +1,4 @@
 import React from "react";
-// import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
 
 export const Logo = () => {
@@ -180,8 +179,8 @@ export const Logo = () => {
       opacity: 1,
       y: 0,
       transition: {
-        delay: 0.3 + i * 0.1,
-        duration: 0.3,
+        delay: 0.2 + i * 0.1,
+        duration: 0.2,
       },
     }),
   };
@@ -195,6 +194,10 @@ export const Logo = () => {
         viewBox="0 0 123 120"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
+        style={{
+          transform: "translateZ(0)",
+          willChange: "transform, opacity",
+        }}
       >
         <defs>
           <mask id="brush_mask">
@@ -213,9 +216,11 @@ export const Logo = () => {
                 visible: {
                   pathLength: 1,
                   transition: {
-                    duration: 1.7,
+                    duration: 1.8,
                     ease: "easeInOut",
                   },
+                  transform: "translateZ(0)",
+                  willChange: "transform, opacity",
                 },
               }}
             />
