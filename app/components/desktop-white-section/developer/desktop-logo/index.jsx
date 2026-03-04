@@ -13,7 +13,6 @@ export const Logo = () => {
       return () => window.removeEventListener("load", handleLoad);
     }
   }, []);
-  console.log("loaded is", loaded);
   const ensoLtrs = [
     <motion.svg
       className="w-[65rem] h-[81rem] bg-none"
