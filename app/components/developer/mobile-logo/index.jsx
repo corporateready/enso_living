@@ -81,7 +81,7 @@ export const Logo = () => {
                 visible: {
                   pathLength: 1,
                   transition: {
-                    duration: 3.5,
+                    duration: 2,
                     ease: "easeInOut",
                   },
                   transform: "translateZ(0)",
