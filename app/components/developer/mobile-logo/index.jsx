@@ -226,7 +226,7 @@ export const Logo = () => {
                A 36 36 0 0 1 149 78
                A 36 36 0 0 1 113 114"
               stroke="white"
-              strokeWidth={20}
+              strokeWidth={10}
               strokeLinecap="round"
               fill="none"
               variants={{
