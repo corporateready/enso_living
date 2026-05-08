@@ -88,7 +88,7 @@ const Index = () => {
         </button>
        <div className="flex gap-[6rem] relative z-0">
           <Link
-          href={"/"}
+          href={"/living"}
             // type="button"
             // aria-label="select language"
             className={!isOpenLanguage ? "w-[45rem] h-[45rem] bg-[#d9d9d9]/20 rounded-full flex justify-center items-center text-white text-[18rem] uppercase": ""}
@@ -104,7 +104,7 @@ const Index = () => {
             </span> : <span></span>
             } */}
           </Link>
-          <Link href={"tel:"} className={styles.header__phone}></Link>
+          {/* <Link href={"tel:"} className={styles.header__phone}></Link> */}
           <svg
             className="w-[24rem] h-[24rem] inline-block absolute top-[10rem] right-[11rem] translate-0 z-[-1] sm:w-0"
             viewBox="0 0 24 24"

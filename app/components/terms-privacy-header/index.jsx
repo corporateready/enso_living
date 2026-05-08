@@ -23,7 +23,7 @@ const Page = () => {
               />
             </div>
             <div className="relative z-0">
-            <Link href={"tel:"} className={styles.header__phone}></Link>
+            {/* <Link href={"tel:"} className={styles.header__phone}></Link> */}
             <svg
                 className="inline-block z-2 w-[26rem] h-[26rem] absolute top-[9rem] right-[8rem] z-[-1] sm:w-0"
                 viewBox="0 0 26 26"

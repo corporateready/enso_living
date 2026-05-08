@@ -115,7 +115,7 @@ const page = () => {
                 )} */}
               </Link>
 
-              <Link href="tel:" className={styles.thanks__header_phone}></Link>
+              {/* <Link href="tel:" className={styles.thanks__header_phone}></Link> */}
               <svg
                 className="w-[24rem] h-[24rem] inline-block absolute top-[37rem] right-[35rem] -translate-0 z-[-1] group-hover:rotate-45 sm:w-0"
                 viewBox="0 0 24 24"
@@ -160,7 +160,7 @@ const page = () => {
                 </div>
               </div>
               <div className={styles.socials__link}>
-                <svg
+                {/* <svg
                   className="w-[23rem] h-[22rem] sm:w-[46rem] sm:h-[44rem] absolute top-[3rem] left-0 translate-0 z-[-1] opacity-60"
                   viewBox="0 0 23 22"
                   fill="none"
@@ -174,7 +174,7 @@ const page = () => {
                 <Link
                   href={"tel:+"}
                   className={styles.thanks__footer_phone}
-                ></Link>
+                ></Link> */}
                 <Link
                   href={
                     "https://www.facebook.com/profile.php?id=61580179168995"

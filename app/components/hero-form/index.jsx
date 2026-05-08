@@ -117,7 +117,7 @@ export const HeroForm = ({
             prezentarea PDF
           </p>
           <form
-            onSubmit={(e) => e.preventDefault()}
+            onSubmit={e=> {e.preventDefault}}
             className={styles.form__submit}
           >
             <input

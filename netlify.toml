@@ -1,33 +1,41 @@
-  [build]
+[build]
   command = "next build"
   publish = ".next"
-
-  [[redirects]]
-  from = "https://ensoliving.ro/*"
-  to = "https://enso.ro/:splat"
-  status = 301
-  force = true
 
 [build.environment]
   NODE_VERSION = "20"
   NEXT_PRIVATE_BUILD_WORKER = "1"
 
+[[redirects]]
+  from = "https://ensoliving.ro/*"
+  to = "https://enso.ro/living"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://enso.ro/"
+  to = "https://enso.ro/living"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "https://enso.ro/*"
+  to = "https://enso.ro/living"
+  status = 301
+  force = true
+
 [[headers]]
   for = "/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
 
 [[headers]]
-  for = "*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-    
-[[headers]]
-  for = "*.js"
+  for = "/*.css"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
-for = "/*"
+  for = "/*.js"
   [headers.values]
-  Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+    Cache-Control = "public, max-age=31536000, immutable"
