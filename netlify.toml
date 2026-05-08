@@ -7,20 +7,20 @@
   NEXT_PRIVATE_BUILD_WORKER = "1"
 
 [[redirects]]
-  from = "https://ensoliving.ro/*"
-  to = "https://enso.ro/living"
+  from = "https://enso-living.netlify.app/*"
+  to = "https://enso-living.netlify.app/living"
   status = 301
   force = true
 
 [[redirects]]
-  from = "https://enso.ro/"
-  to = "https://enso.ro/living"
+  from = "https://enso-living.netlify.app/"
+  to = "https://enso-living.netlify.app/living"
   status = 301
   force = true
 
 [[redirects]]
-  from = "https://enso.ro/*"
-  to = "https://enso.ro/living"
+  from = "https://enso-living.netlify.app/*"
+  to = "https://enso-living.netlify.app/living"
   status = 301
   force = true
 
