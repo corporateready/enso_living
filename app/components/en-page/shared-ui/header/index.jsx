@@ -105,7 +105,7 @@ const Index = () => {
             } */}
           </Link>
           {/* <Link href={"tel:"} className={styles.header__phone}></Link> */}
-          <svg
+          {/* <svg
             className="w-[24rem] h-[24rem] inline-block absolute top-[10rem] right-[11rem] translate-0 z-[-1] sm:w-0"
             viewBox="0 0 24 24"
             fill="none"
@@ -117,7 +117,7 @@ const Index = () => {
               strokeLinecap="round"
               strokeLinejoin="round"
             />
-          </svg>
+          </svg> */}
         </div>
       </div>
     </header>
