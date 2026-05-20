@@ -27,10 +27,10 @@ export const DesktopSlider = (props) => {
     onNextButtonClick,
   } = usePrevNextButtons(emblaApi);
   const slides = [
-    { id: 1, image: img_1 },
-    { id: 2, image: img_2 },
-    { id: 3, image: img_3 },
-    { id: 4, image: img_4 },
+    { id: 1, image: img_1, alt: "ENSŌ LIVING Brașov landscape design — exterior view 1" },
+    { id: 2, image: img_2, alt: "ENSŌ LIVING Brașov landscape design — exterior view 2" },
+    { id: 3, image: img_3, alt: "ENSŌ LIVING Brașov landscape design — exterior view 3" },
+    { id: 4, image: img_4, alt: "ENSŌ LIVING Brașov landscape design — exterior view 4" },
   ];
   return (
     <section className={styles.embla}>
@@ -42,7 +42,7 @@ export const DesktopSlider = (props) => {
               >
                 <Image
                   src={slide.image}
-                  alt=""
+                  alt={slide.alt}
                   fill
                   priority={true}
                   quality={85}

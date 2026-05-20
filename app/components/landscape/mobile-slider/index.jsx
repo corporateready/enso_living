@@ -12,15 +12,11 @@ export const MobileSlider = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const slides = [
-    {id:1,
-    image:img_1},
-    {id:2,
-    image:img_2},
-    {id:3,
-    image:img_3},
-    {id:4,
-      image:img_4}
-];
+    { id: 1, image: img_1, alt: "Landscape design ENSŌ LIVING Brașov — grădină și spații verzi 1" },
+    { id: 2, image: img_2, alt: "Landscape design ENSŌ LIVING Brașov — grădină și spații verzi 2" },
+    { id: 3, image: img_3, alt: "Landscape design ENSŌ LIVING Brașov — grădină și spații verzi 3" },
+    { id: 4, image: img_4, alt: "Landscape design ENSŌ LIVING Brașov — grădină și spații verzi 4" },
+  ];
   return (
     <section className={styles.embla}>
       <div className={styles.embla__viewport} ref={emblaRef}>
@@ -28,7 +24,7 @@ export const MobileSlider = (props) => {
           {slides.map((slide) => (
             <div className={styles.embla__slide} key={slide.id}>
               <div className={styles.embla__slide__image}>
-                <Image src={slide.image} alt="" fill priority={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
+                <Image src={slide.image} alt={slide.alt} fill priority={true} sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"/>
               </div>
             </div>
           ))}

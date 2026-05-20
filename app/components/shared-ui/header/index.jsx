@@ -1,24 +1,16 @@
 import React from "react";
 import styles from "./styles.module.scss";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 
 const Index = () => {
-  const router = useRouter();
-
   const [isOpenLanguage, setIsOpenLanguage] = React.useState(false)
-  const handleBack = () => {
-    router.back();
-  };
-  console.log("is active ", isOpenLanguage)
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
-        <button
-          type="button"
+        <Link
+          href="/"
           className={styles.logo}
-          aria-label="logo"
-          onClick={handleBack}
+          aria-label="ENSŌ LIVING — pagina principală"
         >
           <span className="w-[90rem] h-[30rem] sm:w-[100rem] sm:h-[33rem]">
             <svg
@@ -85,7 +77,7 @@ const Index = () => {
               />
             </svg>
           </span>
-        </button>
+        </Link>
         <div className="flex gap-[6rem] relative z-0">
           <Link
           href="/living-en"

@@ -12,14 +12,22 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ensodevelopment.ro';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://enso.ro';
 const OG_TITLE = "Unicul penthouse triplex premium în Brașov | ENSŌ LIVING";
 const OG_DESC = "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.";
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+};
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: OG_TITLE,
   description: OG_DESC,
+  alternates: {
+    canonical: '/living',
+  },
   robots: {
     index: true,
     follow: true,
@@ -31,7 +39,7 @@ export const metadata = {
   openGraph: {
     title: OG_TITLE,
     description: OG_DESC,
-    url: '/',
+    url: '/living',
     siteName: 'ENSŌ LIVING',
     locale: 'ro_RO',
     type: 'website',
@@ -57,10 +65,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="ro" className={inter.className} data-scroll-behavior="smooth">
       <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
-        />
         <link
           rel="apple-touch-icon"
           sizes="180x180"

@@ -15,12 +15,12 @@ export const MobileSlider = (props) => {
   const [emblaRef, emblaApi] = useEmblaCarousel(options);
 
   const slides = [
-    { id: 1, image: img_1 },
-    { id: 6, image: img_6 },
-    { id: 2, image: img_2 },
-    { id: 3, image: img_3 },
-    { id: 4, image: img_4 },
-    { id: 5, image: img_5 },
+    { id: 1, image: img_1, alt: "Interior duplex ENSŌ LIVING Brașov — living pe două niveluri" },
+    { id: 6, image: img_6, alt: "Interior duplex ENSŌ LIVING Brașov — scară interioară" },
+    { id: 2, image: img_2, alt: "Interior duplex ENSŌ LIVING Brașov — dormitor master" },
+    { id: 3, image: img_3, alt: "Interior duplex ENSŌ LIVING Brașov — bucătărie open-space" },
+    { id: 4, image: img_4, alt: "Interior duplex ENSŌ LIVING Brașov — baie premium" },
+    { id: 5, image: img_5, alt: "Interior duplex ENSŌ LIVING Brașov — vedere panoramică" },
   ];
   return (
     <section className={styles.embla}>
@@ -42,7 +42,7 @@ export const MobileSlider = (props) => {
               <div className={styles.embla__slide__image}>
                 <Image
                   src={slide.image}
-                  alt=""
+                  alt={slide.alt}
                   fill
                   priority={true}
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
