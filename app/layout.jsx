@@ -12,9 +12,14 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://ensodevelopment.ro';
+const OG_TITLE = "Unicul penthouse triplex premium în Brașov | ENSŌ LIVING";
+const OG_DESC = "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.";
+
 export const metadata = {
-  title: "Unicul penthouse triplex premium în Brașov | ENSŌ LIVING",
-  description: "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.",
+  metadataBase: new URL(SITE_URL),
+  title: OG_TITLE,
+  description: OG_DESC,
   robots: {
     index: true,
     follow: true,
@@ -23,14 +28,35 @@ export const metadata = {
       follow: true,
     },
   },
+  openGraph: {
+    title: OG_TITLE,
+    description: OG_DESC,
+    url: '/',
+    siteName: 'ENSŌ LIVING',
+    locale: 'ro_RO',
+    type: 'website',
+    images: [
+      {
+        url: '/building-6.webp',
+        width: 1200,
+        height: 630,
+        alt: 'ENSŌ LIVING — proiect imobiliar premium în Brașov',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: OG_TITLE,
+    description: OG_DESC,
+    images: ['/building-6.webp'],
+  },
 };
 
 export default function RootLayout({ children }) {
   const GTM_ID = "GTM-5ZS2J3NB";
   return (
-    <html lang="en" className={inter.className} data-scroll-behavior="smooth">
+    <html lang="ro" className={inter.className} data-scroll-behavior="smooth">
       <head>
-        <meta name="robots" content="index, follow" />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"

@@ -78,6 +78,8 @@ const Index = () => {
             href={
               "https://www.google.com/maps/place/45%C2%B038'06.3%22N+25%C2%B038'16.7%22E/@45.635093,25.637957,17z/data=!3m1!4b1!4m4!3m3!8m2!3d45.635093!4d25.637957?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
             }
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.google__map_link__mobile}
           >
             <span className="w-[13rem] h-[18rem] inline-block">
@@ -117,6 +119,8 @@ const Index = () => {
             <Link
               href={"https://www.facebook.com/profile.php?id=61580179168995"}
               aria-label="facebook"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 className="w-[13rem] h-[24rem] sm:w-[26rem] sm:h-[48rem] opacity-60"
@@ -133,6 +137,8 @@ const Index = () => {
             <Link
               href={"https://www.instagram.com/ensodevelopment.ro"}
               aria-label="instagram"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 className="w-[24rem] h-[24rem] sm:w-[48rem] sm:h-[48rem] opacity-60"
@@ -149,6 +155,8 @@ const Index = () => {
             <Link
               href={"https://www.youtube.com/@ensodevelopmentro"}
               aria-label="you tube"
+              target="_blank"
+              rel="noopener noreferrer"
             >
               <svg
                 className="w-[27rem] h-[19rem] sm:w-[54rem] sm:h-[38rem] opacity-60"
@@ -169,6 +177,8 @@ const Index = () => {
             href={
               "https://www.google.com/maps/place/45%C2%B038'06.3%22N+25%C2%B038'16.7%22E/@45.635093,25.637957,17z/data=!3m1!4b1!4m4!3m3!8m2!3d45.635093!4d25.637957?entry=ttu&g_ep=EgoyMDI1MTIwMi4wIKXMDSoASAFQAw%3D%3D"
             }
+            target="_blank"
+            rel="noopener noreferrer"
             className={styles.google__map_link__desktop}
           >
             <span className="w-[14rem] h-[20rem] inline-block">

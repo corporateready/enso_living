@@ -179,6 +179,8 @@ const page = () => {
                   href={
                     "https://www.facebook.com/profile.php?id=61580179168995"
                   }
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   <svg
                     className="w-[13rem] h-[24rem] sm:w-[26rem] sm:h-[48rem] opacity-60"
@@ -192,7 +194,7 @@ const page = () => {
                     />
                   </svg>
                 </Link>
-                <Link href={"https://www.instagram.com/ensodevelopment.ro"}>
+                <Link href={"https://www.instagram.com/ensodevelopment.ro"} target="_blank" rel="noopener noreferrer">
                   <svg
                     className="w-[24rem] h-[24rem] sm:w-[48rem] sm:h-[48rem] opacity-60"
                     viewBox="0 0 24 24"
@@ -205,7 +207,7 @@ const page = () => {
                     />
                   </svg>
                 </Link>
-                <Link href={"https://www.youtube.com/@ensodevelopmentro"}>
+                <Link href={"https://www.youtube.com/@ensodevelopmentro"} target="_blank" rel="noopener noreferrer">
                   <svg
                     className="w-[27rem] h-[19rem] sm:w-[54rem] sm:h-[38rem] opacity-60"
                     viewBox="0 0 27 19"
