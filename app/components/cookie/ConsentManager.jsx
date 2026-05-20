@@ -21,7 +21,6 @@ export default function ConsentManager() {
       setBannerVisible(true);
     }
 
-    // Allow external trigger: window.dispatchEvent(new Event('open-consent-manager'))
     const handleOpenModal = () => {
       setBannerVisible(true);
       setModalOpen(true);
@@ -114,14 +113,14 @@ export default function ConsentManager() {
                 flexShrink: 0,
               }}
             >
-              <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
+              {/* <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
                 Gestionează
-              </BannerButton>
+              </BannerButton> */}
               <BannerButton onClick={handleRejectAll} variant="ghost">
                 Respinge
               </BannerButton>
               <BannerButton onClick={handleAcceptAll} variant="primary">
-                Accept toate
+                Accept
               </BannerButton>
             </div>
           </div>
