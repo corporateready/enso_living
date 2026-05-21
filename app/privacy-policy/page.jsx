@@ -13,7 +13,7 @@ const Page = () => {
             Privacy Policy for "NOTORIUM" S.R.L.
           </p>
           <p className={styles.description}>
-            At ENSO LIVING, accessible from avenew.md, one of our main
+            At ENSO LIVING, accessible from enso.ro/living, one of our main
             priorities is the privacy of our visitors. This Privacy Policy
             document contains types of information that is collected and
             recorded by ENSO LIVING and how we use it. If you have additional

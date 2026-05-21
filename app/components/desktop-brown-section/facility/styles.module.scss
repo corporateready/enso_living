@@ -47,10 +47,10 @@ background: linear-gradient(180deg,rgba(128, 99, 99, 1) 0%, rgba(78, 78, 100, 1)
 }
 }
 .inner__list_item__down {
-    @apply flex items-center justify-end gap-[356rem] w-full h-[128rem] border-b-[2px] border-[#5A4C45] overflow-y-hidden;
+    @apply flex items-center justify-end gap-[350rem] w-full h-[128rem] border-b-[2px] border-[#5A4C45] overflow-y-hidden;
 
     .item__text {
-    @apply text-[26rem] text-white leading-[118%] mt-[15rem];
+    @apply text-[26rem] text-white leading-[118%] mt-[15rem] mr-[6rem];
 }
 
 }
