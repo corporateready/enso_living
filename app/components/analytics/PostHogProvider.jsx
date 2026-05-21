@@ -17,7 +17,6 @@ export default function PostHogProvider() {
     posthog.init(key, {
       api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com',
       persistence: 'localStorage+cookie',
-      // Start opted-out; we opt-in below only if consent is stored
       opt_out_capturing_by_default: true,
       capture_pageview: true,
       capture_pageleave: true,

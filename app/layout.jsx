@@ -45,7 +45,7 @@ export const metadata = {
     type: 'website',
     images: [
       {
-        url: '/building-6.webp',
+        url: '/enso-logo-transporate.png',
         width: 1200,
         height: 630,
         alt: 'ENSŌ LIVING — proiect imobiliar premium în Brașov',
@@ -56,7 +56,7 @@ export const metadata = {
     card: 'summary_large_image',
     title: OG_TITLE,
     description: OG_DESC,
-    images: ['/building-6.webp'],
+    images: ['/enso-logo-transporate.png'],
   },
 };
 
