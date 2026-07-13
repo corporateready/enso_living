@@ -23,7 +23,7 @@ const page = () => {
       <div className={styles.thanks}>
         <header className={styles.header}>
           <div className={styles.header__inner}>
-            <Link href={"/"}>
+            <Link href={"/living"}>
               <svg
                 className="w-[90rem] h-[30rem] sm:w-[150rem] sm:h-[50rem]"
                 viewBox="0 0 149 50"

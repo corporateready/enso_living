@@ -23,12 +23,12 @@ import { HeroForm } from "./components/hero-form";
 import Cookies from "js-cookie";
 import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
+import { readTrackingIds, waitForTrackingIds } from "../lib/tracking-ids";
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_PIXEL_ID;
 
 export default function Home() {
   const router = useRouter();
-  const eventIdGen = uuidv4();
   const formSubmittedEventId = uuidv4();
   
   const [name, setName] = React.useState("");
@@ -38,7 +38,6 @@ export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
 
   const [userLocation, setUserLocation] = React.useState("");
-  const [isEventId, setIsEventId] = React.useState("");
   const [isFBP, setIsFBP] = React.useState("");
   const [isFBC, setIsFBC] = React.useState("");
   const [isPageViewEventId, setIsPageViewEventId] = React.useState("");
@@ -62,18 +61,16 @@ export default function Home() {
   }, []);
 
   React.useEffect(() => {
-    const pvei = localStorage.getItem("pageview_event_id");
-    const ei = localStorage.getItem("external_id");
+    const { pageview_event_id, external_id } = readTrackingIds();
 
     if (typeof window !== "undefined") {
-      setIsPageViewEventId(pvei);
-      setIsExternalId(ei);
+      setIsPageViewEventId(pageview_event_id);
+      setIsExternalId(external_id);
     }
   }, []);
 
    React.useEffect(() => {
     const fbp = Cookies.get("_fbp");
-    setIsEventId(eventIdGen);
     setIsFBP(fbp);
   }, []);
 
@@ -85,7 +82,25 @@ export default function Home() {
     setIsFBC(fbc)
   }, []);
 
-  const formSubmitTrack = () => {
+  const formSubmitTrack = async () => {
+    if (isFormSubmitted) return;
+
+    setIsFormSubmitted(true);
+
+    const submittedName = name;
+    const submittedEmail = email;
+    const submittedPhone = phone;
+    const trackingIds = await waitForTrackingIds();
+    const pageviewEventId = trackingIds.pageview_event_id || isPageViewEventId;
+    const externalId = trackingIds.external_id || isExternalId;
+    const fbp = Cookies.get("_fbp") || isFBP;
+    const fbc = Cookies.get("_fbc") || isFBC;
+
+    setIsPageViewEventId(pageviewEventId);
+    setIsExternalId(externalId);
+    setIsFBP(fbp);
+    setIsFBC(fbc);
+
     if (typeof window !== "undefined" && typeof window.fbq !== "undefined") {
       window.fbq(
         "track",
@@ -93,34 +108,31 @@ export default function Home() {
         {},
         {
           eventID: isFormSubmittedEventId,
-          fbc: isFBC,
-          em: email,
-          ph: phone,
-          fn: name,
+          fbc,
+          em: submittedEmail,
+          ph: submittedPhone,
+          fn: submittedName,
           ct: userLocation,
           ip: isIP,
-          pageview_event_id: isPageViewEventId,
-          external_id: isExternalId,
+          pageview_event_id: pageviewEventId,
+          external_id: externalId,
         },
       );
     }
 
     if (typeof window !== "undefined" && window.posthog)
       window.posthog.capture("form_submitted", {
-        fbc: isFBC,
-        fbp: isFBP,
-        email: email,
-        phone: phone,
-        name: name,
-        pageview_event_id: isPageViewEventId,
-        external_id: isExternalId,
+        fbc,
+        fbp,
+        email: submittedEmail,
+        phone: submittedPhone,
+        name: submittedName,
+        pageview_event_id: pageviewEventId,
+        external_id: externalId,
         form_submitted_event_id: isFormSubmittedEventId,
       });
 
-    if (!isFormSubmitted) {
-      setIsFormSubmitted(true);
-      router.push("/thank-you-ro");
-    }
+    router.push("/thank-you-ro");
   };
 
   const handlerFormOpen = () => {
@@ -130,7 +142,6 @@ export default function Home() {
 
   React.useEffect(() => {
     const fbp = Cookies.get("_fbp");
-    setIsEventId(eventIdGen);
     setIsFBP(fbp);
   }, []);
 

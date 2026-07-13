@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const [isOpenLanguage, setIsOpenLanguage] = React.useState(false);
   return (
     <div className={styles.thanks_overflow}>
@@ -24,7 +24,7 @@ const page = () => {
       <div className={styles.thanks}>
         <header className={styles.header}>
           <div className={styles.header__inner}>
-            <Link href={"/en"}>
+            <Link href={"/living-en"}>
               <svg
                 className="w-[90rem] h-[30rem] sm:w-[150rem] sm:h-[50rem]"
                 viewBox="0 0 149 50"
@@ -232,4 +232,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

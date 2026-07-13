@@ -3,7 +3,6 @@ import Script from "next/script";
 import "./globals.css";
 import GoogleTagManager from "./components/GoogleTagManager";
 import ConsentManager from "./components/cookie/ConsentManager";
-import PostHogProvider from "./components/analytics/PostHogProvider";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -150,7 +149,6 @@ export default function RootLayout({ children }) {
       <body className={`antialiased`}>
         {children}
         <ConsentManager />
-        <PostHogProvider />
         <Script
           id="to-top"
           dangerouslySetInnerHTML={{
