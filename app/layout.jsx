@@ -12,12 +12,13 @@ const inter = Inter({
   weight: ["400", "500", "600", "700"],
 });
 
-const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://enso.ro';
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://enso.ro";
 const OG_TITLE = "Unicul penthouse triplex premium în Brașov | ENSŌ LIVING";
-const OG_DESC = "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.";
+const OG_DESC =
+  "Lansare proiect imobiliar premium în Brașov, cu localizare strategică și priveliști spre munți. Doar 24 de apartamente, 4 duplexuri, business centru, showroom comercial și parcare subterană.";
 
 export const viewport = {
-  width: 'device-width',
+  width: "device-width",
   initialScale: 1,
 };
 
@@ -26,7 +27,7 @@ export const metadata = {
   title: OG_TITLE,
   description: OG_DESC,
   alternates: {
-    canonical: '/living',
+    canonical: "/living",
   },
   robots: {
     index: true,
@@ -39,24 +40,24 @@ export const metadata = {
   openGraph: {
     title: OG_TITLE,
     description: OG_DESC,
-    url: '/living',
-    siteName: 'ENSŌ LIVING',
-    locale: 'ro_RO',
-    type: 'website',
+    url: "/living",
+    siteName: "ENSŌ LIVING",
+    locale: "ro_RO",
+    type: "website",
     images: [
       {
-        url: '/enso-logo-transporate.png',
+        url: "/enso-logo-transporate.png",
         width: 1200,
         height: 630,
-        alt: 'ENSŌ LIVING — proiect imobiliar premium în Brașov',
+        alt: "ENSŌ LIVING — proiect imobiliar premium în Brașov",
       },
     ],
   },
   twitter: {
-    card: 'summary_large_image',
+    card: "summary_large_image",
     title: OG_TITLE,
     description: OG_DESC,
-    images: ['/enso-logo-transporate.png'],
+    images: ["/enso-logo-transporate.png"],
   },
 };
 
@@ -160,16 +161,3 @@ export default function RootLayout({ children }) {
     </html>
   );
 }
-// Roistat old function
-// var customParamTimer = setInterval(function() {
-//     window.roistat.setRoistatParams({
-//       roistat_param_2: '{{FBP Cookie}}',
-//       'roistat_param2': '{{FBP Cookie}}',
-          
-//       roistat_param_3: '{{Pageview Event ID from storage}}',
-//       'roistat_param3': '{{Pageview Event ID from storage}}',
-          
-//       roistat_param_4: '{{External ID from storage}}',
-//       'roistat_param4': '{{External ID from storage}}'
-//       });
-// }, 2200);

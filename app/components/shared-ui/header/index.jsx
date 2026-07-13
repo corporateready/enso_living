@@ -6,7 +6,7 @@ const Index = () => {
   const [isOpenLanguage, setIsOpenLanguage] = React.useState(false)
   return (
     <header className={styles.header}>
-      <div className={styles.inner}>
+      <div className={styles.inner}>re4ygth
         <Link
           href="/"
           className={styles.logo}

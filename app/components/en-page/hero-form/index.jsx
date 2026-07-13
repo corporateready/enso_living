@@ -7,6 +7,16 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { motion } from "motion/react";
 
+import {
+  CUSTOM_COUNTRY_FORMATS,
+  DEFAULT_LOCAL_MASK,
+  getCountryMask,
+  phoneCountries,
+  normalizeLocalDigits,
+  buildPhoneValue,
+  maskToPlaceholder,
+} from "../../../../lib/lib-masked";
+
 export const HeroForm = ({
   handlerFormOpen,
   name,
@@ -30,30 +40,48 @@ export const HeroForm = ({
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handleChangePhone = (value) => {
-    let cleanedValue = value.replace(/^\+0+/, "+40");
-    cleanedValue = cleanedValue.replace(/^\+400/, "+40");
+  const [selectedCountry, setSelectedCountry] = React.useState({
+    iso2: "ro",
+    dialCode: "40",
+    format: CUSTOM_COUNTRY_FORMATS.ro,
+  });
 
-    setPhone(cleanedValue);
-  };
+  const currentMask = getCountryMask(selectedCountry);
+  const currentPlaceholder = maskToPlaceholder(currentMask);
+
+  const handleDesktopEnterNext = React.useCallback((event, nextElementId) => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+
+    const nextElement = document.getElementById(nextElementId);
+    nextElement?.focus();
+  }, []);
+
   React.useEffect(() => {
     if (name.length >= 3 && email.match("@") && phone.length >= 12) {
       setIsDisabled(true);
     }
   }, [name, email, phone, isDisabled]);
 
+   const clearForm = React.useCallback(() => {
+      setName("");
+      setEmail("");
+      setPhone("");
+    }, [setEmail, setName, setPhone]);
+
   return (
-    <div onClick={handlerFormOpen} className={styles.section}>
+    <div className={styles.section}>
       <div className="absolute top-0 left-0 z-1 bg-black/40 inset-0 backdrop-blur-[14px]"></div>
       <div
         className={styles.inner}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
       >
         <button
           type="button"
-          onClick={handlerFormOpen}
+          onClick={() =>{
+            handlerFormOpen();
+            clearForm()
+          }}
           className={styles.close__btn}
         >
           <svg
@@ -122,18 +150,56 @@ export const HeroForm = ({
               value={name}
               placeholder="Full Name"
               onChange={handleChangeName}
+              onKeyDown={(e) => handleDesktopEnterNext(e, "email")}
             />
             <input
               type="email"
+              id="email"
               name="email"
               value={email}
               placeholder="Email"
               onChange={handleChangeEmail}
+              onKeyDown={(e) => handleDesktopEnterNext(e, "phone")}
             />
             <div className={styles.phone__input}>
               <PhoneInput
-                name="phone"
+                countries={phoneCountries}
+                inputProps={{
+                  id: "phone",
+                  name: "phone",
+                  type: "tel",
+                  autoComplete: "tel-national",
+                  inputMode: "numeric",
+                  pattern: "[0-9]*",
+                  onKeyDown: (e) =>
+                    handleDesktopEnterNext(e, "_form_1_submit"),
+                }}
+                inputStyle={{
+                  borderRadius: "30px",
+                  padding: "0px",
+                }}
+                value={phone}
+                onChange={(value, meta) => {
+                  const country = meta.country;
+
+                  setSelectedCountry(country);
+
+                  const localDigits = normalizeLocalDigits(
+                    meta.inputValue,
+                    country,
+                  );
+
+                  setPhone(buildPhoneValue(country, localDigits));
+                }}
+                required
                 defaultCountry="ro"
+                placeholder={currentPlaceholder}
+                defaultMask={DEFAULT_LOCAL_MASK}
+                allowMaskOverflow={false}
+                disableCountryGuess
+                disableDialCodeAndPrefix
+                showDisabledDialCodeAndPrefix
+                inputClassName="bg-white text-[16rem] placeholder:text-[16rem] placeholder:text-[#7d7f80]"
                 style={{
                   "--react-international-phone-background-color": "#F4F2F2",
                   "--react-international-phone-text-color": "#7D7F80",
@@ -152,12 +218,11 @@ export const HeroForm = ({
                     isMobile ? "16px" : "18rem"
                   }`,
                 }}
-                value={phone}
-                onChange={handleChangePhone}
               />
             </div>
             <motion.button
               type="button"
+              id="_form_1_submit"
               className={styles.offer__btn}
               aria-label="form submitted"
               onClick={formSubmitTrack}

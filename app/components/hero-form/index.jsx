@@ -7,6 +7,16 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 import { motion } from "motion/react";
 
+import {
+  CUSTOM_COUNTRY_FORMATS,
+  DEFAULT_LOCAL_MASK,
+  getCountryMask,
+  phoneCountries,
+  normalizeLocalDigits,
+  buildPhoneValue,
+  maskToPlaceholder,
+} from "../../../lib/lib-masked";
+
 export const HeroForm = ({
   handlerFormOpen,
   name,
@@ -20,8 +30,6 @@ export const HeroForm = ({
   const isMobile = useMediaQuery({
     query: "(max-width: 640px)",
   });
-
-  const [isDisabled, setIsDisabled] = React.useState(false);
   const [isHoveredButton, setIsHoveredButton] = React.useState(false);
 
   const handleChangeName = (e) => {
@@ -30,30 +38,60 @@ export const HeroForm = ({
   const handleChangeEmail = (e) => {
     setEmail(e.target.value);
   };
-  const handleChangePhone = (value) => {
-    let cleanedValue = value.replace(/^\+0+/, "+40");
-    cleanedValue = cleanedValue.replace(/^\+400/, "+40");
+  const [selectedCountry, setSelectedCountry] = React.useState({
+    iso2: "ro",
+    dialCode: "40",
+    format: CUSTOM_COUNTRY_FORMATS.ro,
+  });
 
-    setPhone(cleanedValue);
-  };
-  React.useEffect(() => {
-    if (name.length >= 3 && email.match("@") && phone.length >= 12) {
-      setIsDisabled(true);
-    }
-  }, [name, email, phone, isDisabled]);
+  const currentMask = getCountryMask(selectedCountry);
+  const currentPlaceholder = maskToPlaceholder(currentMask);
+
+  const handleDesktopEnterNext = React.useCallback((event, nextElementId) => {
+    if (event.key !== "Enter") return;
+
+    event.preventDefault();
+
+    const nextElement = document.getElementById(nextElementId);
+    nextElement?.focus();
+  }, []);
+
+  const isSubmitDisabled =
+    name.length < 3 || !email.includes("@") || phone.length < 12;
+
+  const clearForm = React.useCallback(() => {
+    setName("");
+    setEmail("");
+    setPhone("");
+  }, [setEmail, setName, setPhone]);
+
+  const handleSubmit = React.useCallback(
+    (event) => {
+      event.preventDefault();
+
+      if (isSubmitDisabled) {
+        return;
+      }
+
+      formSubmitTrack();
+      clearForm();
+      handlerFormOpen();
+    },
+    [clearForm, formSubmitTrack, handlerFormOpen, isSubmitDisabled],
+  );
+
+  const isSubmitReady = !isSubmitDisabled;
 
   return (
-    <div onClick={handlerFormOpen} className={styles.section}>
+    <div className={styles.section}>
       <div className="absolute top-0 left-0 z-1 bg-black/40 inset-0 backdrop-blur-[14px]"></div>
-      <div
-        className={styles.inner}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-      >
+      <div className={styles.inner}>
         <button
           type="button"
-          onClick={handlerFormOpen}
+          onClick={() => {
+            handlerFormOpen();
+            clearForm();
+          }}
           className={styles.close__btn}
         >
           <svg
@@ -117,8 +155,12 @@ export const HeroForm = ({
             prezentarea PDF
           </p>
           <form
-            onSubmit={e=> {e.preventDefault}}
             className={styles.form__submit}
+            id="_form_1"
+            method="POST"
+            noValidate
+            data-styles-version="4"
+            onSubmit={handleSubmit}
           >
             <input
               type="text"
@@ -126,18 +168,53 @@ export const HeroForm = ({
               value={name}
               placeholder="Nume, Prenume"
               onChange={handleChangeName}
+              onKeyDown={(e) => handleDesktopEnterNext(e, "email")}
+              required
             />
             <input
               type="email"
+              id="email"
               name="email"
               value={email}
               placeholder="E-mail"
               onChange={handleChangeEmail}
+              required
+              onKeyDown={(e) => handleDesktopEnterNext(e, "phone")}
             />
             <div className={styles.phone__input}>
               <PhoneInput
-                name="phone"
+                countries={phoneCountries}
+                inputProps={{
+                  id: "phone",
+                  name: "phone",
+                  type: "tel",
+                  autoComplete: "tel-national",
+                  inputMode: "numeric",
+                  pattern: "[0-9]*",
+                  onKeyDown: (e) => handleDesktopEnterNext(e, "_form_1_submit"),
+                }}
+                value={phone}
+                onChange={(value, meta) => {
+                  const country = meta.country;
+
+                  setSelectedCountry(country);
+
+                  const localDigits = normalizeLocalDigits(
+                    meta.inputValue,
+                    country,
+                  );
+
+                  setPhone(buildPhoneValue(country, localDigits));
+                }}
+                required
                 defaultCountry="ro"
+                placeholder={currentPlaceholder}
+                defaultMask={DEFAULT_LOCAL_MASK}
+                allowMaskOverflow={false}
+                disableCountryGuess
+                disableDialCodeAndPrefix
+                showDisabledDialCodeAndPrefix
+                inputClassName="bg-white text-[16rem] placeholder:text-[16rem] placeholder:text-[#7d7f80]"
                 style={{
                   "--react-international-phone-background-color": "#F4F2F2",
                   "--react-international-phone-text-color": "#7D7F80",
@@ -156,16 +233,14 @@ export const HeroForm = ({
                     isMobile ? "16px" : "18rem"
                   }`,
                 }}
-                value={phone}
-                onChange={handleChangePhone}
               />
             </div>
             <motion.button
-              type="button"
+              type="submit"
+              id="_form_1_submit"
               className={styles.offer__btn}
               aria-label="form submitted"
-              onClick={formSubmitTrack}
-              disabled={!isDisabled}
+              disabled={isSubmitDisabled}
               onHoverStart={() => setIsHoveredButton(true)}
               onHoverEnd={() => setIsHoveredButton(false)}
             >
@@ -175,43 +250,47 @@ export const HeroForm = ({
               <svg
                 className="w-[42rem] h-[42rem] sm:w-[61rem] sm:h-[61rem]"
                 viewBox="0 0 61 61"
-                fill={`${isHoveredButton && isDisabled ? "white" : "none"}`}
+                fill={`${isHoveredButton && isSubmitReady ? "white" : "none"}`}
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <circle cx="30.5" cy="30.5" r="30" stroke="white" />
                 <motion.path
                   d="M23.0762 28.6923V22.5385C23.0762 22.1304 23.2383 21.7391 23.5268 21.4506C23.8153 21.1621 24.2066 21 24.6146 21H32.3069L39.9992 28.6923V39.4615C39.9992 39.8696 39.8372 40.2609 39.5486 40.5494C39.2601 40.8379 38.8688 41 38.4608 41H30.7685"
-                  stroke={`${isHoveredButton && isDisabled ? "#667761" : "white"}`}
+                  stroke={`${isHoveredButton && isSubmitReady ? "#667761" : "white"}`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <motion.path
                   d="M32.3076 21V28.6923H39.9999"
-                  stroke={`${isHoveredButton && isDisabled ? "#667761" : "white"}`}
+                  stroke={`${isHoveredButton && isSubmitReady ? "#667761" : "white"}`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <motion.path
-                  animate={isHoveredButton && isDisabled ? {} : { rotate: 360 }}
+                  animate={
+                    isHoveredButton && isSubmitReady ? {} : { rotate: 360 }
+                  }
                   transition={{
-                    duration: isHoveredButton && isDisabled ? 0 : 2,
+                    duration: isHoveredButton && isSubmitReady ? 0 : 2,
                     repeat: Infinity,
                     ease: "linear",
                   }}
                   d="M24.6152 31.7695V41.0003"
-                  stroke={`${isHoveredButton && isDisabled ? "#667761" : "white"}`}
+                  stroke={`${isHoveredButton && isSubmitReady ? "#667761" : "white"}`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
                 <motion.path
-                  animate={isHoveredButton && isDisabled ? {} : { rotate: 360 }}
+                  animate={
+                    isHoveredButton && isSubmitReady ? {} : { rotate: 360 }
+                  }
                   transition={{
-                    duration: isHoveredButton && isDisabled ? 0 : 2,
+                    duration: isHoveredButton && isSubmitReady ? 0 : 2,
                     repeat: Infinity,
                     ease: "linear",
                   }}
                   d="M20 36.3848H29.2308"
-                  stroke={`${isHoveredButton && isDisabled ? "#667761" : "white"}`}
+                  stroke={`${isHoveredButton && isSubmitReady ? "#667761" : "white"}`}
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
