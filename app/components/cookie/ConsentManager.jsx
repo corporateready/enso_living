@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
 import {
   loadConsent,
   saveConsent,
@@ -10,21 +10,37 @@ import {
 } from "../../../lib/consent";
 
 const DEFAULT_PREFS = { analytics: false, marketing: false };
+const CONSENT_CHANGE_EVENT = "enso-consent-change";
 import { useMediaQuery } from "react-responsive";
+
+function subscribeToConsent(callback) {
+  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
+  return () => window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
+}
+
+function getConsentSnapshot() {
+  return Boolean(loadConsent());
+}
+
+function getServerConsentSnapshot() {
+  return true;
+}
 
 export default function ConsentManager() {
   const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
-  const [bannerVisible, setBannerVisible] = useState(false);
+  const hasConsent = useSyncExternalStore(
+    subscribeToConsent,
+    getConsentSnapshot,
+    getServerConsentSnapshot,
+  );
+  const [forceBannerVisible, setForceBannerVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [prefs, setPrefs] = useState(DEFAULT_PREFS);
+  const bannerVisible = forceBannerVisible || !hasConsent;
 
   useEffect(() => {
-    if (!loadConsent()) {
-      setBannerVisible(true);
-    }
-
     const handleOpenModal = () => {
-      setBannerVisible(true);
+      setForceBannerVisible(true);
       setModalOpen(true);
     };
     window.addEventListener("open-consent-manager", handleOpenModal);
@@ -34,10 +50,11 @@ export default function ConsentManager() {
 
   const applyConsent = useCallback((newPrefs, eventName) => {
     saveConsent(newPrefs);
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
     updateGTMConsent(newPrefs);
     pushConsentEvent(eventName, newPrefs);
     syncPostHog(newPrefs.analytics);
-    setBannerVisible(false);
+    setForceBannerVisible(false);
     setModalOpen(false);
   }, []);
 

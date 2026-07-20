@@ -1,0 +1,25 @@
+{
+  "date": "2026-07-20",
+  "url": "http://127.0.0.1:3000",
+  "commit": "e0e03aa",
+  "healthScore": 84,
+  "issues": [
+    { "id": "ISSUE-001", "title": "Trackers run before consent", "severity": "critical", "category": "functional" },
+    { "id": "ISSUE-002", "title": "Playwright suite does not test the application", "severity": "high", "category": "functional" },
+    { "id": "ISSUE-003", "title": "Customize submit label contradicts saved preferences", "severity": "medium", "category": "ux" },
+    { "id": "ISSUE-004", "title": "Romanian page shows mixed-language consent UI", "severity": "medium", "category": "content" },
+    { "id": "ISSUE-005", "title": "English route exposes Romanian document metadata", "severity": "medium", "category": "content" },
+    { "id": "ISSUE-006", "title": "Lead form lacks dialog semantics and accessible field names", "severity": "medium", "category": "accessibility" },
+    { "id": "ISSUE-007", "title": "PostHog config CORS error in local WebKit", "severity": "low", "category": "console" }
+  ],
+  "categoryScores": {
+    "console": 70,
+    "links": 100,
+    "visual": 100,
+    "functional": 60,
+    "ux": 92,
+    "performance": 92,
+    "content": 84,
+    "accessibility": 92
+  }
+}
