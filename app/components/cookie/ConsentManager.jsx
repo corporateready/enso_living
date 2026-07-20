@@ -1,6 +1,8 @@
 "use client";
 
 import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
+import { usePathname } from "next/navigation";
+import { useMediaQuery } from "react-responsive";
 import {
   loadConsent,
   saveConsent,
@@ -8,10 +10,13 @@ import {
   pushConsentEvent,
   syncPostHog,
 } from "../../../lib/consent";
+import {
+  CONSENT_TRANSLATIONS,
+  getConsentLocale,
+} from "./consent-translations";
 
 const DEFAULT_PREFS = { analytics: false, marketing: false };
 const CONSENT_CHANGE_EVENT = "enso-consent-change";
-import { useMediaQuery } from "react-responsive";
 
 function subscribeToConsent(callback) {
   window.addEventListener(CONSENT_CHANGE_EVENT, callback);
@@ -27,6 +32,9 @@ function getServerConsentSnapshot() {
 }
 
 export default function ConsentManager() {
+  const pathname = usePathname();
+  const locale = getConsentLocale(pathname);
+  const copy = CONSENT_TRANSLATIONS[locale];
   const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
   const hasConsent = useSyncExternalStore(
     subscribeToConsent,
@@ -40,6 +48,15 @@ export default function ConsentManager() {
 
   useEffect(() => {
     const handleOpenModal = () => {
+      const consent = loadConsent();
+      setPrefs(
+        consent
+          ? {
+              analytics: consent.analytics,
+              marketing: consent.marketing,
+            }
+          : DEFAULT_PREFS,
+      );
       setForceBannerVisible(true);
       setModalOpen(true);
     };
@@ -76,33 +93,28 @@ export default function ConsentManager() {
       {!modalOpen && (
         <div
           role="region"
-          aria-label="Cookie consent"
+          aria-label={copy.regionLabel}
           className="fixed bottom-1/2 left-1/2 z-[9999] h-dvh w-dvw -translate-x-1/2 translate-y-1/2 border-t border-white/[0.07] bg-[rgba(12,12,12,0.1)] backdrop-blur-[10px]"
         >
           <div
-            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[380rem] sm:w-[1280rem] sm:gap-0 rounded-[0rem] border-none px-0 "
+            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[380rem] sm:w-[1280rem] sm:gap-0 rounded-none sm:rounded-[10rem] border-none px-0 "
           >
             <p className="text-black text-[18rem] m-0 flex-[1_1_280rem] font-[Inter,sans-serif] font-400 px-100 border-t border-black/[0.1] pt-[20rem]">
-              <b>This website uses cookies</b>
+              <b>{copy.bannerTitle}</b>
               <span className="inline-flex mt-40 leading-[150%]">
-                We use cookies to personalise content and ads, to provide social
-                media features and to analyse our traffic. We also share
-                information about your use of our site with our social media,
-                advertising and analytics partners who may combine it with other
-                information that you’ve provided to them or that they’ve
-                collected from your use of their services.
+                {copy.bannerDescription}
               </span>
             </p>
 
             <div className="flex sm:w-full w-full shrink-0 flex-col sm:flex-row items-center gap-40 w-1120 border-t border-black/[0.1] pt-[20rem] px-[20rem] sm:px-100">
               <BannerButton onClick={handleRejectAll} variant="ghost">
-                Deny
+                {copy.deny}
               </BannerButton>
               <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
-                Customize
+                {copy.customize}
               </BannerButton>
               <BannerButton onClick={handleAcceptAll} variant="ghost">
-                Allow all
+                {copy.allowAll}
               </BannerButton>
             </div>
           </div>
@@ -113,7 +125,7 @@ export default function ConsentManager() {
         <div
           role="dialog"
           aria-modal="true"
-          aria-label="Preferințe cookie-uri"
+          aria-label={copy.preferencesTitle}
           className="fixed inset-0 z-[10000] flex items-center justify-center bg-[rgba(12,12,12,0.1)] p-[16rem] backdrop-blur-[10px]
           "
         >
@@ -137,10 +149,10 @@ export default function ConsentManager() {
                   letterSpacing: "-0.01em",
                 }}
               >
-                Preferințe cookie-uri
+                {copy.preferencesTitle}
               </h2>
               <button
-                aria-label="Închide"
+                aria-label={copy.close}
                 onClick={() => setModalOpen(false)}
                 style={{
                   background: "none",
@@ -158,21 +170,22 @@ export default function ConsentManager() {
             </div>
 
             <ConsentRow
-              label="Essentials"
-              description="Required for the website's operation: call tracking and phone number substitution."
+              label={copy.essentials}
+              description={copy.essentialsDescription}
+              alwaysActiveLabel={copy.alwaysActive}
               alwaysOn
             />
 
             <ConsentRow
-              label="Analytics and Performance"
-              description="Helps us understand how the website is used. (Google Analytics, PostHog)."
+              label={copy.analytics}
+              description={copy.analyticsDescription}
               checked={prefs.analytics}
               onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
             />
 
             <ConsentRow
-              label="Marketing and Advertising"
-              description="Enable the display of relevant advertisements .(Meta Pixel, LinkedIn Ads, Google Ads)."
+              label={copy.marketing}
+              description={copy.marketingDescription}
               checked={prefs.marketing}
               onChange={(v) => setPrefs((p) => ({ ...p, marketing: v }))}
               last
@@ -180,10 +193,10 @@ export default function ConsentManager() {
 
             <div className="mt-112 flex justify-center gap-32">
               <ModalButton onClick={handleRejectAll} variant="ghost">
-                Deny
+                {copy.deny}
               </ModalButton>
               <ModalButton onClick={handleSavePrefs} variant="ghost">
-                Allow all
+                {copy.savePreferences}
               </ModalButton>
             </div>
           </div>
@@ -193,7 +206,15 @@ export default function ConsentManager() {
   );
 }
 
-function ConsentRow({ label, description, checked, onChange, alwaysOn, last }) {
+function ConsentRow({
+  label,
+  description,
+  checked,
+  onChange,
+  alwaysOn,
+  alwaysActiveLabel,
+  last,
+}) {
   return (
     <div
       style={{
@@ -229,19 +250,20 @@ function ConsentRow({ label, description, checked, onChange, alwaysOn, last }) {
             flexShrink: 0,
           }}
         >
-          Always active
+          {alwaysActiveLabel}
         </span>
       ) : (
-        <Toggle checked={checked} onChange={onChange} />
+        <Toggle ariaLabel={label} checked={checked} onChange={onChange} />
       )}
     </div>
   );
 }
 
-function Toggle({ checked, onChange }) {
+function Toggle({ ariaLabel, checked, onChange }) {
   return (
     <button
       role="switch"
+      aria-label={ariaLabel}
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       style={{
@@ -282,7 +304,7 @@ function BannerButton({ onClick, variant, children }) {
     fontFamily: "Inter, sans-serif",
     fontWeight: 700,
     padding: "18rem 10rem",
-    borderRadius: "4rem",
+    borderRadius: "6rem",
     whiteSpace: "nowrap",
     letterSpacing: "0.01em",
     transition: "opacity 0.15s",
