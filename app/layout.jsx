@@ -133,7 +133,7 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        <GoogleTagManager gtmId={GTM_ID} />
+        {/* <GoogleTagManager gtmId={GTM_ID} />
         <noscript
           dangerouslySetInnerHTML={{
             __html: `
@@ -144,7 +144,7 @@ export default function RootLayout({ children }) {
             </iframe>
             `,
           }}
-        />
+        /> */}
       </head>
       <body className={`antialiased`}>
         {children}

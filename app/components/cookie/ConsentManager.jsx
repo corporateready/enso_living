@@ -1,17 +1,19 @@
-'use client';
+"use client";
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback } from "react";
 import {
   loadConsent,
   saveConsent,
   updateGTMConsent,
   pushConsentEvent,
   syncPostHog,
-} from '../../../lib/consent';
+} from "../../../lib/consent";
 
 const DEFAULT_PREFS = { analytics: false, marketing: false };
+import { useMediaQuery } from "react-responsive";
 
 export default function ConsentManager() {
+  const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
   const [bannerVisible, setBannerVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [prefs, setPrefs] = useState(DEFAULT_PREFS);
@@ -25,8 +27,9 @@ export default function ConsentManager() {
       setBannerVisible(true);
       setModalOpen(true);
     };
-    window.addEventListener('open-consent-manager', handleOpenModal);
-    return () => window.removeEventListener('open-consent-manager', handleOpenModal);
+    window.addEventListener("open-consent-manager", handleOpenModal);
+    return () =>
+      window.removeEventListener("open-consent-manager", handleOpenModal);
   }, []);
 
   const applyConsent = useCallback((newPrefs, eventName) => {
@@ -39,13 +42,15 @@ export default function ConsentManager() {
   }, []);
 
   const handleAcceptAll = () =>
-    applyConsent({ analytics: true, marketing: true }, 'consent_accepted_all');
+    applyConsent({ analytics: true, marketing: true }, "consent_accepted_all");
 
   const handleRejectAll = () =>
-    applyConsent({ analytics: false, marketing: false }, 'consent_rejected_all');
+    applyConsent(
+      { analytics: false, marketing: false },
+      "consent_rejected_all",
+    );
 
-  const handleSavePrefs = () =>
-    applyConsent(prefs, 'consent_saved_custom');
+  const handleSavePrefs = () => applyConsent(prefs, "consent_saved_custom");
 
   if (!bannerVisible) return null;
 
@@ -55,72 +60,32 @@ export default function ConsentManager() {
         <div
           role="region"
           aria-label="Cookie consent"
-          style={{
-            position: 'fixed',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            zIndex: 9999,
-            backgroundColor: 'rgba(12, 12, 12, 0.97)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            borderTop: '1px solid rgba(255,255,255,0.07)',
-          }}
+          className="fixed bottom-1/2 left-1/2 z-[9999] h-dvh w-dvw -translate-x-1/2 translate-y-1/2 border-t border-white/[0.07] bg-[rgba(12,12,12,0.1)] backdrop-blur-[10px]"
         >
           <div
-            style={{
-              maxWidth: '1280px',
-              margin: '0 auto',
-              padding: '18px 24px',
-              display: 'flex',
-              flexWrap: 'wrap',
-              alignItems: 'center',
-              gap: '14px',
-              justifyContent: 'space-between',
-            }}
+            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[380rem] sm:w-[1280rem] sm:gap-0 rounded-[0rem] border-none px-0 "
           >
-            <p
-              style={{
-                color: 'rgba(255,255,255,0.72)',
-                fontSize: '13px',
-                lineHeight: '1.55',
-                margin: 0,
-                flex: '1 1 280px',
-                fontFamily: 'Inter, sans-serif',
-                fontWeight: 400,
-              }}
-            >
-              Utilizăm cookie-uri pentru a îmbunătăți experiența pe site și a analiza traficul.{' '}
-              <a
-                href="/privacy-policy"
-                style={{
-                  color: 'rgba(255,255,255,0.42)',
-                  textDecoration: 'underline',
-                  textUnderlineOffset: '2px',
-                  fontSize: '13px',
-                }}
-              >
-                Politica de confidențialitate
-              </a>
+            <p className="text-black text-[18rem] m-0 flex-[1_1_280rem] font-[Inter,sans-serif] font-400 px-100 border-t border-black/[0.1] pt-[20rem]">
+              <b>This website uses cookies</b>
+              <span className="inline-flex mt-40 leading-[150%]">
+                We use cookies to personalise content and ads, to provide social
+                media features and to analyse our traffic. We also share
+                information about your use of our site with our social media,
+                advertising and analytics partners who may combine it with other
+                information that you’ve provided to them or that they’ve
+                collected from your use of their services.
+              </span>
             </p>
 
-            <div
-              style={{
-                display: 'flex',
-                gap: '8px',
-                flexWrap: 'wrap',
-                alignItems: 'center',
-                flexShrink: 0,
-              }}
-            >
-              {/* <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
-                Gestionează
-              </BannerButton> */}
+            <div className="flex sm:w-full w-full shrink-0 flex-col sm:flex-row items-center gap-40 w-1120 border-t border-black/[0.1] pt-[20rem] px-[20rem] sm:px-100">
               <BannerButton onClick={handleRejectAll} variant="ghost">
-                Respinge
+                Deny
               </BannerButton>
-              <BannerButton onClick={handleAcceptAll} variant="primary">
-                Accept
+              <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
+                Customize
+              </BannerButton>
+              <BannerButton onClick={handleAcceptAll} variant="ghost">
+                Allow all
               </BannerButton>
             </div>
           </div>
@@ -132,54 +97,43 @@ export default function ConsentManager() {
           role="dialog"
           aria-modal="true"
           aria-label="Preferințe cookie-uri"
-          style={{
-            position: 'fixed',
-            inset: 0,
-            zIndex: 10000,
-            backgroundColor: 'rgba(0,0,0,0.65)',
-            backdropFilter: 'blur(4px)',
-            WebkitBackdropFilter: 'blur(4px)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '16px',
-          }}
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[rgba(12,12,12,0.1)] p-[16rem] backdrop-blur-[10px]
+          "
         >
           <div
-            style={{
-              backgroundColor: '#0e0e0e',
-              border: '1px solid rgba(255,255,255,0.09)',
-              borderRadius: '10px',
-              padding: '32px',
-              maxWidth: '460px',
-              width: '100%',
-              fontFamily: 'Inter, sans-serif',
-              color: '#fff',
-            }}
+            className="
+              w-full sm:w-1840 rounded-[10rem] border-[1rem] border-none bg-white p-[32rem] font-['Inter',sans-serif] text-black/65"
           >
             <div
               style={{
-                display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                marginBottom: '28px',
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginBottom: "28px",
               }}
             >
-              <h2 style={{ margin: 0, fontSize: '17px', fontWeight: 600, letterSpacing: '-0.01em' }}>
+              <h2
+                style={{
+                  margin: 0,
+                  fontSize: "17px",
+                  fontWeight: 600,
+                  letterSpacing: "-0.01em",
+                }}
+              >
                 Preferințe cookie-uri
               </h2>
               <button
                 aria-label="Închide"
                 onClick={() => setModalOpen(false)}
                 style={{
-                  background: 'transparent',
-                  border: 'none',
-                  color: 'rgba(255,255,255,0.35)',
-                  cursor: 'pointer',
-                  fontSize: '18px',
+                  background: "none",
+                  border: "none",
+                  color: "rgba(0,0,0,0.95)",
+                  cursor: "pointer",
+                  fontSize: "18rem",
                   lineHeight: 1,
-                  padding: '4px 6px',
-                  borderRadius: '4px',
+                  padding: "4rem 6rem",
+                  borderRadius: "4rem",
                 }}
               >
                 ✕
@@ -187,39 +141,32 @@ export default function ConsentManager() {
             </div>
 
             <ConsentRow
-              label="Esențiale"
-              description="Necesare pentru funcționarea site-ului: call tracking și substituție număr de telefon. Mereu active."
+              label="Essentials"
+              description="Required for the website's operation: call tracking and phone number substitution."
               alwaysOn
             />
 
             <ConsentRow
-              label="Analiză și performanță"
-              description="Ne ajută să înțelegem cum este utilizat site-ul (Google Analytics, PostHog)."
+              label="Analytics and Performance"
+              description="Helps us understand how the website is used. (Google Analytics, PostHog)."
               checked={prefs.analytics}
               onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
             />
 
             <ConsentRow
-              label="Marketing și publicitate"
-              description="Permit afișarea de anunțuri relevante (Meta Pixel, LinkedIn Ads, Google Ads)."
+              label="Marketing and Advertising"
+              description="Enable the display of relevant advertisements .(Meta Pixel, LinkedIn Ads, Google Ads)."
               checked={prefs.marketing}
               onChange={(v) => setPrefs((p) => ({ ...p, marketing: v }))}
               last
             />
 
-            <div
-              style={{
-                display: 'flex',
-                gap: '8px',
-                justifyContent: 'flex-end',
-                marginTop: '28px',
-              }}
-            >
+            <div className="mt-112 flex justify-center gap-32">
               <ModalButton onClick={handleRejectAll} variant="ghost">
-                Respinge toate
+                Deny
               </ModalButton>
-              <ModalButton onClick={handleSavePrefs} variant="primary">
-                Salvează preferințele
+              <ModalButton onClick={handleSavePrefs} variant="ghost">
+                Allow all
               </ModalButton>
             </div>
           </div>
@@ -233,23 +180,23 @@ function ConsentRow({ label, description, checked, onChange, alwaysOn, last }) {
   return (
     <div
       style={{
-        paddingBottom: last ? 0 : '20px',
-        marginBottom: last ? 0 : '20px',
-        borderBottom: last ? 'none' : '1px solid rgba(255,255,255,0.06)',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'flex-start',
-        gap: '16px',
+        paddingBottom: last ? 0 : "20px",
+        marginBottom: last ? 0 : "20px",
+        borderBottom: last ? "none" : "1px solid rgba(255,255,255,0.06)",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "flex-start",
+        gap: "16px",
       }}
     >
       <div style={{ flex: 1 }}>
-        <p style={{ margin: 0, fontSize: '14px', fontWeight: 500 }}>{label}</p>
+        <p style={{ margin: 0, fontSize: "14px", fontWeight: 500 }}>{label}</p>
         <p
           style={{
-            margin: '5px 0 0',
-            fontSize: '12px',
-            color: 'rgba(255,255,255,0.42)',
-            lineHeight: '1.5',
+            margin: "5px 0 0",
+            fontSize: "12px",
+            color: "black",
+            lineHeight: "1.5",
           }}
         >
           {description}
@@ -258,14 +205,14 @@ function ConsentRow({ label, description, checked, onChange, alwaysOn, last }) {
       {alwaysOn ? (
         <span
           style={{
-            fontSize: '11px',
-            color: 'rgba(255,255,255,0.28)',
-            whiteSpace: 'nowrap',
-            marginTop: '3px',
+            fontSize: "11px",
+            color: "black",
+            whiteSpace: "nowrap",
+            marginTop: "3px",
             flexShrink: 0,
           }}
         >
-          Mereu activ
+          Always active
         </span>
       ) : (
         <Toggle checked={checked} onChange={onChange} />
@@ -281,28 +228,30 @@ function Toggle({ checked, onChange }) {
       aria-checked={checked}
       onClick={() => onChange(!checked)}
       style={{
-        width: '42px',
-        height: '24px',
-        borderRadius: '12px',
-        border: 'none',
-        background: checked ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.13)',
-        cursor: 'pointer',
-        position: 'relative',
+        width: "42rem",
+        height: "24rem",
+        borderRadius: "12rem",
+        border: "1rem solid rgba(0,0,0,0.18)",
+        background: checked
+          ? "rgba(0, 162, 255, 0.2)"
+          : "rgba(0,0,0,0.1)",
+        cursor: "pointer",
+        position: "relative",
         flexShrink: 0,
-        transition: 'background 0.18s ease',
-        outline: 'none',
+        transition: "background 0.18s ease",
+        outline: "none",
       }}
     >
       <span
         style={{
-          position: 'absolute',
-          top: '3px',
-          left: checked ? '21px' : '3px',
-          width: '18px',
-          height: '18px',
-          borderRadius: '50%',
-          background: checked ? '#0e0e0e' : 'rgba(255,255,255,0.55)',
-          transition: 'left 0.18s ease, background 0.18s ease',
+          position: "absolute",
+          top: "3rem",
+          left: checked ? "21rem" : "3rem",
+          width: "18rem",
+          height: "18rem ",
+          borderRadius: "50%",
+          background: checked ? "rgb(0, 162, 255)" : "#0e0e0e",
+          transition: "left 0.18s ease, background 0.18s ease",
         }}
       />
     </button>
@@ -311,29 +260,33 @@ function Toggle({ checked, onChange }) {
 
 function BannerButton({ onClick, variant, children }) {
   const base = {
-    cursor: 'pointer',
-    fontSize: '12px',
-    fontFamily: 'Inter, sans-serif',
-    fontWeight: 500,
-    padding: '8px 18px',
-    borderRadius: '5px',
-    whiteSpace: 'nowrap',
-    letterSpacing: '0.01em',
-    transition: 'opacity 0.15s',
+    cursor: "pointer",
+    fontSize: "18rem",
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 700,
+    padding: "18rem 10rem",
+    borderRadius: "4rem",
+    whiteSpace: "nowrap",
+    letterSpacing: "0.01em",
+    transition: "opacity 0.15s",
+    width: "100%",
   };
   const ghost = {
-    background: 'transparent',
-    border: '1px solid rgba(255,255,255,0.2)',
-    color: 'rgba(255,255,255,0.58)',
+    background: "#00a2ff",
+    fontWeight: 700,
   };
   const primary = {
-    background: 'rgba(255,255,255,0.94)',
-    border: 'none',
-    color: '#0e0e0e',
-    fontWeight: 600,
+    background: "rgba(255,255,255,0.94)",
+    border: "none",
+    color: "#000",
+    fontWeight: 700,
   };
   return (
-    <button onClick={onClick} style={{ ...base, ...(variant === 'primary' ? primary : ghost) }}>
+    <button
+      onClick={onClick}
+      style={{ ...base, ...(variant === "primary" ? primary : ghost) }}
+      className="hover:opacity-90"
+    >
       {children}
     </button>
   );
@@ -341,27 +294,32 @@ function BannerButton({ onClick, variant, children }) {
 
 function ModalButton({ onClick, variant, children }) {
   const base = {
-    cursor: 'pointer',
-    fontSize: '13px',
-    fontFamily: 'Inter, sans-serif',
-    fontWeight: 500,
-    padding: '10px 20px',
-    borderRadius: '5px',
-    letterSpacing: '0.01em',
+    cursor: "pointer",
+    fontSize: "16rem",
+    fontFamily: "Inter, sans-serif",
+    fontWeight: 700,
+    padding: "10rem 20rem",
+    borderRadius: "5rem",
+    letterSpacing: "0.01em",
   };
   const ghost = {
-    background: 'transparent',
-    border: '1px solid rgba(255,255,255,0.18)',
-    color: 'rgba(255,255,255,0.52)',
+    background: "#00a2ff",
+    border: "none",
+    color: "black",
+    width: "100%",
   };
   const primary = {
-    background: 'rgba(255,255,255,0.94)',
-    border: 'none',
-    color: '#0e0e0e',
+    background: "rgba(255,255,255,0.94)",
+    border: "none",
+    color: "#0e0e0e",
     fontWeight: 600,
   };
   return (
-    <button onClick={onClick} style={{ ...base, ...(variant === 'primary' ? primary : ghost) }}>
+    <button
+      onClick={onClick}
+      style={{ ...base, ...(variant === "primary" ? primary : ghost) }}
+      className="hover:opacity-90 transition-all duration-150"
+    >
       {children}
     </button>
   );
