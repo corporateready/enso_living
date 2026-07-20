@@ -94,10 +94,10 @@ export default function ConsentManager() {
         <div
           role="region"
           aria-label={copy.regionLabel}
-          className="fixed bottom-1/2 left-1/2 z-[9999] h-dvh w-dvw -translate-x-1/2 translate-y-1/2 border-t border-white/[0.07] bg-[rgba(12,12,12,0.1)] backdrop-blur-[10px]"
+          className="fixed bottom-1/2 left-1/2 z-[9999] h-dvh w-dvw -translate-x-1/2 translate-y-1/2 border-t border-white/[0.07] bg-[rgba(12,12,12,0.1)]"
         >
           <div
-            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[380rem] sm:w-[1280rem] sm:gap-0 rounded-none sm:rounded-[10rem] border-none px-0 "
+            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[360rem] sm:w-[980rem] sm:gap-0 rounded-none sm:rounded-[10rem] border-none px-0 "
           >
             <p className="text-black text-[18rem] m-0 flex-[1_1_280rem] font-[Inter,sans-serif] font-400 px-100 border-t border-black/[0.1] pt-[20rem]">
               <b>{copy.bannerTitle}</b>
@@ -272,7 +272,7 @@ function Toggle({ ariaLabel, checked, onChange }) {
         borderRadius: "12rem",
         border: "1rem solid rgba(0,0,0,0.18)",
         background: checked
-          ? "rgba(0, 162, 255, 0.2)"
+          ? "rgba(102, 119, 97, 0.2)"
           : "rgba(0,0,0,0.1)",
         cursor: "pointer",
         position: "relative",
@@ -289,7 +289,7 @@ function Toggle({ ariaLabel, checked, onChange }) {
           width: "18rem",
           height: "18rem ",
           borderRadius: "50%",
-          background: checked ? "rgb(0, 162, 255)" : "#0e0e0e",
+          background: checked ? "rgb(102, 119, 97)" : "#0e0e0e",
           transition: "left 0.18s ease, background 0.18s ease",
         }}
       />
@@ -304,20 +304,21 @@ function BannerButton({ onClick, variant, children }) {
     fontFamily: "Inter, sans-serif",
     fontWeight: 700,
     padding: "18rem 10rem",
-    borderRadius: "6rem",
+    borderRadius: "50rem",
     whiteSpace: "nowrap",
     letterSpacing: "0.01em",
     transition: "opacity 0.15s",
     width: "100%",
   };
   const ghost = {
-    background: "#00a2ff",
+    background: "#667761",
     fontWeight: 700,
+    color: "#fff",
   };
   const primary = {
     background: "rgba(255,255,255,0.94)",
     border: "none",
-    color: "#000",
+    color: "#fff",
     fontWeight: 700,
   };
   return (
@@ -342,9 +343,9 @@ function ModalButton({ onClick, variant, children }) {
     letterSpacing: "0.01em",
   };
   const ghost = {
-    background: "#00a2ff",
+    background: "#667761",
     border: "none",
-    color: "black",
+    color: "#fff",
     width: "100%",
   };
   const primary = {
