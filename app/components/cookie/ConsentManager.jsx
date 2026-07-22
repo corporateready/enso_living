@@ -126,8 +126,7 @@ export default function ConsentManager() {
           role="dialog"
           aria-modal="true"
           aria-label={copy.preferencesTitle}
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[rgba(12,12,12,0.1)] p-[16rem] backdrop-blur-[10px]
-          "
+          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[rgba(12,12,12,0.1)]"
         >
           <div
             className="
