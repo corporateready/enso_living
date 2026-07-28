@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { loadConsent, saveConsent, clearConsent, updateGTMConsent, pushConsentEvent, syncPostHog } from '../../lib/consent';
+import { loadConsent, saveConsent, clearConsent, updateGTMConsent, pushConsentEvent } from '../../lib/consent';
+import { applyAnalyticsConsent } from '../../lib/analytics';
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
@@ -167,11 +168,11 @@ export default function DevCookieTest() {
     saveConsent({ analytics: true, marketing: true });
     updateGTMConsent({ analytics: true, marketing: true });
     pushConsentEvent('consent_accepted_all', { analytics: true, marketing: true });
-    syncPostHog(true);
+    void applyAnalyticsConsent(true);
     log('pass', '✔ saveConsent({analytics:true, marketing:true})');
     log('pass', '✔ updateGTMConsent fired');
     log('pass', '✔ pushConsentEvent("consent_accepted_all") pushed to dataLayer');
-    log('pass', '✔ syncPostHog(true) called → posthog.opt_in_capturing()');
+    log('pass', '✔ applyAnalyticsConsent(true) called');
     refresh();
   };
 
@@ -180,11 +181,11 @@ export default function DevCookieTest() {
     saveConsent({ analytics: false, marketing: false });
     updateGTMConsent({ analytics: false, marketing: false });
     pushConsentEvent('consent_rejected_all', { analytics: false, marketing: false });
-    syncPostHog(false);
+    void applyAnalyticsConsent(false);
     log('pass', '✔ saveConsent({analytics:false, marketing:false})');
     log('pass', '✔ updateGTMConsent fired');
     log('pass', '✔ pushConsentEvent("consent_rejected_all") pushed to dataLayer');
-    log('pass', '✔ syncPostHog(false) called → posthog.opt_out_capturing()');
+    log('pass', '✔ applyAnalyticsConsent(false) called');
     refresh();
   };
 
@@ -193,7 +194,7 @@ export default function DevCookieTest() {
     saveConsent({ analytics, marketing });
     updateGTMConsent({ analytics, marketing });
     pushConsentEvent('consent_saved_custom', { analytics, marketing });
-    syncPostHog(analytics);
+    void applyAnalyticsConsent(analytics);
     log('pass', `✔ saveConsent({analytics:${analytics}, marketing:${marketing}})`);
     log('pass', '✔ pushConsentEvent("consent_saved_custom") pushed to dataLayer');
     refresh();
@@ -443,7 +444,7 @@ export default function DevCookieTest() {
           <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Default deny</strong> — setat inline în <code style={{ color: '#a5f3fc' }}>layout.jsx</code> înainte de GTM</li>
           <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Cookie read</strong> — dacă <code style={{ color: '#a5f3fc' }}>enso_consent</code> există, GTM consent e restaurat imediat</li>
           <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Banner</strong> — <code style={{ color: '#a5f3fc' }}>ConsentManager.jsx</code> afișează bannerul dacă cookie-ul lipsește</li>
-          <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Accept/Reject</strong> — <code style={{ color: '#a5f3fc' }}>saveConsent</code> + <code style={{ color: '#a5f3fc' }}>updateGTMConsent</code> + <code style={{ color: '#a5f3fc' }}>pushConsentEvent</code> + <code style={{ color: '#a5f3fc' }}>syncPostHog</code></li>
+          <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Accept/Reject</strong> — <code style={{ color: '#a5f3fc' }}>saveConsent</code> + <code style={{ color: '#a5f3fc' }}>updateGTMConsent</code> + <code style={{ color: '#a5f3fc' }}>pushConsentEvent</code> + <code style={{ color: '#a5f3fc' }}>applyAnalyticsConsent</code></li>
           <li><strong style={{ color: 'rgba(255,255,255,0.7)' }}>Cookie expires</strong> — 365 zile, SameSite=Lax, Secure</li>
         </ol>
       </div>

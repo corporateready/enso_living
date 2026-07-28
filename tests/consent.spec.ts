@@ -34,6 +34,7 @@ test('shows Romanian consent UI on /living and saves custom preferences', async 
   page,
 }) => {
   await page.goto('/living');
+  await expect(page.locator('#consent-managed-gtm')).toHaveCount(0);
 
   const banner = page.getByRole('region', {
     name: 'Consimțământ pentru cookie-uri',
@@ -72,6 +73,7 @@ test('shows Romanian consent UI on /living and saves custom preferences', async 
     analytics: true,
     marketing: false,
   });
+  await expect(page.locator('#consent-managed-gtm')).toHaveCount(1);
 });
 
 test('shows English consent UI on /living-en and saves rejection', async ({
@@ -94,6 +96,56 @@ test('shows English consent UI on /living-en and saves rejection', async ({
     analytics: false,
     marketing: false,
   });
+});
+
+test('rejecting analytics does not request PostHog feature flags', async ({
+  page,
+}) => {
+  let flagsRequestCount = 0;
+  page.on('request', (request) => {
+    if (new URL(request.url()).pathname.includes('/flags/')) {
+      flagsRequestCount += 1;
+    }
+  });
+
+  await page.goto('/living');
+  await page.evaluate(() => {
+    const posthog = {
+      __loaded: true,
+      config: {
+        advanced_disable_feature_flags: false,
+      },
+      set_config(config: Record<string, unknown>) {
+        Object.assign(this.config, config);
+      },
+      stopSessionRecording() {},
+      opt_out_capturing() {},
+      reset() {
+        if (!this.config.advanced_disable_feature_flags) {
+          void fetch('/flags/?v=2&compression=base64', { method: 'POST' });
+        }
+      },
+      persistence: { clear() {} },
+      sessionPersistence: { clear() {} },
+      __request_queue: [],
+      _requestQueue: { _queue: [] },
+      _retryQueue: { _queue: [] },
+    };
+
+    Object.defineProperty(window, 'posthog', {
+      configurable: true,
+      value: posthog,
+      writable: true,
+    });
+  });
+
+  await page
+    .getByRole('region', { name: 'Consimțământ pentru cookie-uri' })
+    .getByRole('button', { name: 'Respinge' })
+    .click();
+  await page.waitForTimeout(100);
+
+  expect(flagsRequestCount).toBe(0);
 });
 
 test('shares consent across languages and reopens preferences in English', async ({
@@ -126,4 +178,48 @@ test('shares consent across languages and reopens preferences in English', async
   await expect(
     dialog.getByRole('button', { name: 'Save preferences' }),
   ).toBeVisible();
+});
+
+test('uses the ENSŌ logo and reopens saved preferences from the cookie button', async ({
+  page,
+}) => {
+  await page.goto('/living');
+
+  const banner = page.getByRole('region', {
+    name: 'Consimțământ pentru cookie-uri',
+  });
+  await expect(
+    banner.getByRole('img', { name: 'ENSŌ Living' }),
+  ).toHaveAttribute('src', /enso-dark-logo\.png/);
+
+  await banner.getByRole('button', { name: 'Personalizează' }).click();
+  const dialog = page.getByRole('dialog', { name: 'Preferințe cookie-uri' });
+  const analytics = dialog.getByRole('switch', {
+    name: 'Analiză și performanță',
+  });
+  await analytics.click();
+  await dialog
+    .getByRole('button', { name: 'Salvează preferințele' })
+    .click();
+
+  const reopenButton = page.getByRole('button', {
+    name: 'Preferințe cookie-uri',
+  });
+  await expect(reopenButton).toBeVisible();
+  // The pre-existing Next.js dev issue indicator overlays the bottom-left
+  // corner in local test runs, exactly where the cookie button is anchored.
+  await reopenButton.focus();
+  await reopenButton.dispatchEvent('click');
+
+  await expect(dialog).toBeVisible();
+  await expect(
+    dialog.getByRole('switch', { name: 'Analiză și performanță' }),
+  ).toHaveAttribute('aria-checked', 'true');
+  await expect(
+    dialog.getByRole('switch', { name: 'Marketing și publicitate' }),
+  ).toHaveAttribute('aria-checked', 'false');
+
+  await page.keyboard.press('Escape');
+  await expect(dialog).toBeHidden();
+  await expect(reopenButton).toBeFocused();
 });

@@ -1,27 +1,33 @@
 "use client";
 
-import { useState, useEffect, useCallback, useSyncExternalStore } from "react";
+import {
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  useSyncExternalStore,
+} from "react";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
-import { useMediaQuery } from "react-responsive";
+import { Cookie, X } from "lucide-react";
 import {
   loadConsent,
-  saveConsent,
-  updateGTMConsent,
   pushConsentEvent,
-  syncPostHog,
+  saveConsent,
+  subscribeToConsent,
+  updateGTMConsent,
 } from "../../../lib/consent";
+import {
+  applyAnalyticsConsent,
+  initializeConsentMode,
+} from "../../../lib/analytics";
 import {
   CONSENT_TRANSLATIONS,
   getConsentLocale,
 } from "./consent-translations";
+import styles from "./consent.module.scss";
 
 const DEFAULT_PREFS = { analytics: false, marketing: false };
-const CONSENT_CHANGE_EVENT = "enso-consent-change";
-
-function subscribeToConsent(callback) {
-  window.addEventListener(CONSENT_CHANGE_EVENT, callback);
-  return () => window.removeEventListener(CONSENT_CHANGE_EVENT, callback);
-}
 
 function getConsentSnapshot() {
   return Boolean(loadConsent());
@@ -33,45 +39,83 @@ function getServerConsentSnapshot() {
 
 export default function ConsentManager() {
   const pathname = usePathname();
-  const locale = getConsentLocale(pathname);
+  const routeLocale = getConsentLocale(pathname);
+  const [locale, setLocale] = useState(routeLocale);
   const copy = CONSENT_TRANSLATIONS[locale];
-  const isMobile = useMediaQuery({ query: "(max-width: 600px)" });
   const hasConsent = useSyncExternalStore(
     subscribeToConsent,
     getConsentSnapshot,
     getServerConsentSnapshot,
   );
-  const [forceBannerVisible, setForceBannerVisible] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [prefs, setPrefs] = useState(DEFAULT_PREFS);
-  const bannerVisible = forceBannerVisible || !hasConsent;
+  const [consentReady, setConsentReady] = useState(false);
+  const previousFocusRef = useRef(null);
+  const dialogRef = useRef(null);
+  const bannerVisible = consentReady && !hasConsent;
+  const ctaMounted = consentReady && hasConsent;
 
   useEffect(() => {
-    const handleOpenModal = () => {
-      const consent = loadConsent();
-      setPrefs(
-        consent
-          ? {
-              analytics: consent.analytics,
-              marketing: consent.marketing,
-            }
-          : DEFAULT_PREFS,
-      );
-      setForceBannerVisible(true);
-      setModalOpen(true);
-    };
-    window.addEventListener("open-consent-manager", handleOpenModal);
-    return () =>
-      window.removeEventListener("open-consent-manager", handleOpenModal);
+    setLocale(routeLocale);
+  }, [routeLocale]);
+
+  useEffect(() => {
+    initializeConsentMode();
+    const consent = loadConsent();
+
+    if (consent) updateGTMConsent(consent);
+    void applyAnalyticsConsent(consent?.analytics === true);
+    setConsentReady(true);
   }, []);
+
+  const openSettings = useCallback(() => {
+    const consent = loadConsent();
+    previousFocusRef.current = document.activeElement;
+    setPrefs(
+      consent
+        ? {
+            analytics: consent.analytics,
+            marketing: consent.marketing,
+          }
+        : DEFAULT_PREFS,
+    );
+    setModalOpen(true);
+  }, []);
+
+  const closeSettings = useCallback(() => {
+    setModalOpen(false);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("open-consent-manager", openSettings);
+    return () =>
+      window.removeEventListener("open-consent-manager", openSettings);
+  }, [openSettings]);
+
+  useEffect(() => {
+    if (!modalOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") closeSettings();
+    };
+
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKeyDown);
+    window.requestAnimationFrame(() => dialogRef.current?.focus());
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      previousFocusRef.current?.focus?.();
+    };
+  }, [closeSettings, modalOpen]);
 
   const applyConsent = useCallback((newPrefs, eventName) => {
     saveConsent(newPrefs);
-    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
     updateGTMConsent(newPrefs);
-    pushConsentEvent(eventName, newPrefs);
-    syncPostHog(newPrefs.analytics);
-    setForceBannerVisible(false);
+    if (newPrefs.analytics) pushConsentEvent(eventName, newPrefs);
+    void applyAnalyticsConsent(newPrefs.analytics);
     setModalOpen(false);
   }, []);
 
@@ -84,121 +128,162 @@ export default function ConsentManager() {
       "consent_rejected_all",
     );
 
-  const handleSavePrefs = () => applyConsent(prefs, "consent_saved_custom");
-
-  if (!bannerVisible) return null;
+  const handleSavePrefs = () =>
+    applyConsent(prefs, "consent_saved_custom");
 
   return (
     <>
-      {!modalOpen && (
+      {bannerVisible && !modalOpen && (
         <div
           role="region"
           aria-label={copy.regionLabel}
-          className="fixed bottom-1/2 left-1/2 z-[9999] h-dvh w-dvw -translate-x-1/2 translate-y-1/2 border-t border-white/[0.07] bg-[rgba(12,12,12,0.1)]"
+          lang={locale}
+          className={styles.bannerBackdrop}
         >
-          <div
-            className="absolute left-1/2 top-1/2 mx-auto flex h-[640rem] w-full -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center gap-[20rem] bg-white pt-[60rem] pb-[30rem] sm:top-1/2 sm:h-[360rem] sm:w-[980rem] sm:gap-0 rounded-none sm:rounded-[10rem] border-none px-0 "
-          >
-            <p className="text-black text-[18rem] m-0 flex-[1_1_280rem] font-[Inter,sans-serif] font-400 px-100 border-t border-black/[0.1] pt-[20rem]">
-              <b>{copy.bannerTitle}</b>
-              <span className="inline-flex mt-40 leading-[150%]">
-                {copy.bannerDescription}
-              </span>
-            </p>
+          <section className={styles.banner}>
+            <header className={styles.bannerHeader}>
+              <Image
+                src="/enso-dark-logo.png"
+                alt="ENSŌ Living"
+                width={128}
+                height={95}
+                priority
+                className={styles.logo}
+              />
 
-            <div className="flex sm:w-full w-full shrink-0 flex-col sm:flex-row items-center gap-40 w-1120 border-t border-black/[0.1] pt-[20rem] px-[20rem] sm:px-100">
-              <BannerButton onClick={handleRejectAll} variant="ghost">
-                {copy.deny}
-              </BannerButton>
-              <BannerButton onClick={() => setModalOpen(true)} variant="ghost">
-                {copy.customize}
-              </BannerButton>
-              <BannerButton onClick={handleAcceptAll} variant="ghost">
-                {copy.allowAll}
-              </BannerButton>
+              <div
+                role="group"
+                aria-label={copy.languageSelectorLabel}
+                className={styles.localeSwitcher}
+              >
+                <button
+                  type="button"
+                  lang="ro"
+                  aria-pressed={locale === "ro"}
+                  className={locale === "ro" ? styles.localeActive : undefined}
+                  onClick={() => setLocale("ro")}
+                >
+                  RO
+                </button>
+                <span aria-hidden="true" />
+                <button
+                  type="button"
+                  lang="en"
+                  aria-pressed={locale === "en"}
+                  className={locale === "en" ? styles.localeActive : undefined}
+                  onClick={() => setLocale("en")}
+                >
+                  EN
+                </button>
+              </div>
+            </header>
+
+            <div className={styles.bannerCopy}>
+              <h2>{copy.bannerTitle}</h2>
+              <p>{copy.bannerDescription}</p>
             </div>
-          </div>
+
+            <div className={styles.bannerActions}>
+              <Button onClick={handleRejectAll}>
+                {copy.deny}
+              </Button>
+              <Button onClick={openSettings}>
+                {copy.customize}
+              </Button>
+              <Button onClick={handleAcceptAll}>
+                {copy.allowAll}
+              </Button>
+            </div>
+          </section>
         </div>
+      )}
+
+      {ctaMounted && (
+        <CookieCTA
+          label={copy.preferencesTitle}
+          onClick={openSettings}
+          hidden={modalOpen}
+        />
       )}
 
       {modalOpen && (
         <div
-          role="dialog"
-          aria-modal="true"
-          aria-label={copy.preferencesTitle}
-          className="fixed inset-0 z-[10000] flex items-center justify-center bg-[rgba(12,12,12,0.1)]"
+          className={styles.modalBackdrop}
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) closeSettings();
+          }}
         >
-          <div
-            className="
-              w-full sm:w-1840 rounded-[10rem] border-[1rem] border-none bg-white p-[32rem] font-['Inter',sans-serif] text-black/65"
+          <section
+            ref={dialogRef}
+            id="cookie-settings-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cookie-settings-title"
+            lang={locale}
+            tabIndex={-1}
+            className={styles.modal}
           >
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginBottom: "28px",
-              }}
-            >
-              <h2
-                style={{
-                  margin: 0,
-                  fontSize: "17px",
-                  fontWeight: 600,
-                  letterSpacing: "-0.01em",
-                }}
-              >
-                {copy.preferencesTitle}
-              </h2>
+            <header className={styles.modalHeader}>
+              <div className={styles.modalTitle}>
+                <span className={styles.cookieMark}>
+                  <Cookie aria-hidden="true" strokeWidth={1.7} />
+                </span>
+                <h2 id="cookie-settings-title">{copy.preferencesTitle}</h2>
+              </div>
               <button
+                type="button"
                 aria-label={copy.close}
-                onClick={() => setModalOpen(false)}
-                style={{
-                  background: "none",
-                  border: "none",
-                  color: "rgba(0,0,0,0.95)",
-                  cursor: "pointer",
-                  fontSize: "18rem",
-                  lineHeight: 1,
-                  padding: "4rem 6rem",
-                  borderRadius: "4rem",
-                }}
+                onClick={closeSettings}
+                className={styles.closeButton}
               >
-                ✕
+                <X aria-hidden="true" />
               </button>
+            </header>
+
+            <div className={styles.preferenceList}>
+              <ConsentRow
+                label={copy.essentials}
+                description={copy.essentialsDescription}
+                alwaysActiveLabel={copy.alwaysActive}
+                alwaysOn
+              />
+              <ConsentRow
+                label={copy.analytics}
+                description={copy.analyticsDescription}
+                checked={prefs.analytics}
+                onChange={(value) =>
+                  setPrefs((current) => ({
+                    ...current,
+                    analytics: value,
+                  }))
+                }
+              />
+              <ConsentRow
+                label={copy.marketing}
+                description={copy.marketingDescription}
+                checked={prefs.marketing}
+                onChange={(value) =>
+                  setPrefs((current) => ({
+                    ...current,
+                    marketing: value,
+                  }))
+                }
+                last
+              />
             </div>
 
-            <ConsentRow
-              label={copy.essentials}
-              description={copy.essentialsDescription}
-              alwaysActiveLabel={copy.alwaysActive}
-              alwaysOn
-            />
-
-            <ConsentRow
-              label={copy.analytics}
-              description={copy.analyticsDescription}
-              checked={prefs.analytics}
-              onChange={(v) => setPrefs((p) => ({ ...p, analytics: v }))}
-            />
-
-            <ConsentRow
-              label={copy.marketing}
-              description={copy.marketingDescription}
-              checked={prefs.marketing}
-              onChange={(v) => setPrefs((p) => ({ ...p, marketing: v }))}
-              last
-            />
-
-            <div className="mt-112 flex justify-center gap-32">
-              <ModalButton onClick={handleRejectAll} variant="ghost">
+            <div className={styles.modalActions}>
+              <Button onClick={handleRejectAll} variant="outline">
                 {copy.deny}
-              </ModalButton>
-              <ModalButton onClick={handleSavePrefs} variant="ghost">
+              </Button>
+              <Button onClick={handleSavePrefs} variant="secondary">
                 {copy.savePreferences}
-              </ModalButton>
+              </Button>
+              <Button onClick={handleAcceptAll} variant="primary">
+                {copy.allowAll}
+              </Button>
             </div>
-          </div>
+          </section>
         </div>
       )}
     </>
@@ -212,45 +297,16 @@ function ConsentRow({
   onChange,
   alwaysOn,
   alwaysActiveLabel,
-  last,
+  last = false,
 }) {
   return (
-    <div
-      style={{
-        paddingBottom: last ? 0 : "20px",
-        marginBottom: last ? 0 : "20px",
-        borderBottom: last ? "none" : "1px solid rgba(255,255,255,0.06)",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "flex-start",
-        gap: "16px",
-      }}
-    >
-      <div style={{ flex: 1 }}>
-        <p style={{ margin: 0, fontSize: "14px", fontWeight: 500 }}>{label}</p>
-        <p
-          style={{
-            margin: "5px 0 0",
-            fontSize: "12px",
-            color: "black",
-            lineHeight: "1.5",
-          }}
-        >
-          {description}
-        </p>
+    <div className={`${styles.preferenceRow} ${last ? styles.lastRow : ""}`}>
+      <div>
+        <h3>{label}</h3>
+        <p>{description}</p>
       </div>
       {alwaysOn ? (
-        <span
-          style={{
-            fontSize: "11px",
-            color: "black",
-            whiteSpace: "nowrap",
-            marginTop: "3px",
-            flexShrink: 0,
-          }}
-        >
-          {alwaysActiveLabel}
-        </span>
+        <span className={styles.alwaysActive}>{alwaysActiveLabel}</span>
       ) : (
         <Toggle ariaLabel={label} checked={checked} onChange={onChange} />
       )}
@@ -261,105 +317,46 @@ function ConsentRow({
 function Toggle({ ariaLabel, checked, onChange }) {
   return (
     <button
+      type="button"
       role="switch"
       aria-label={ariaLabel}
       aria-checked={checked}
       onClick={() => onChange(!checked)}
-      style={{
-        width: "42rem",
-        height: "24rem",
-        borderRadius: "12rem",
-        border: "1rem solid rgba(0,0,0,0.18)",
-        background: checked
-          ? "rgba(102, 119, 97, 0.2)"
-          : "rgba(0,0,0,0.1)",
-        cursor: "pointer",
-        position: "relative",
-        flexShrink: 0,
-        transition: "background 0.18s ease",
-        outline: "none",
-      }}
+      className={`${styles.toggle} ${checked ? styles.toggleChecked : ""}`}
     >
-      <span
-        style={{
-          position: "absolute",
-          top: "3rem",
-          left: checked ? "21rem" : "3rem",
-          width: "18rem",
-          height: "18rem ",
-          borderRadius: "50%",
-          background: checked ? "rgb(102, 119, 97)" : "#0e0e0e",
-          transition: "left 0.18s ease, background 0.18s ease",
-        }}
-      />
+      <span />
     </button>
   );
 }
 
-function BannerButton({ onClick, variant, children }) {
-  const base = {
-    cursor: "pointer",
-    fontSize: "18rem",
-    fontFamily: "Inter, sans-serif",
-    fontWeight: 700,
-    padding: "18rem 10rem",
-    borderRadius: "50rem",
-    whiteSpace: "nowrap",
-    letterSpacing: "0.01em",
-    transition: "opacity 0.15s",
-    width: "100%",
-  };
-  const ghost = {
-    background: "#667761",
-    fontWeight: 700,
-    color: "#fff",
-  };
-  const primary = {
-    background: "rgba(255,255,255,0.94)",
-    border: "none",
-    color: "#fff",
-    fontWeight: 700,
-  };
+function Button({ onClick, variant, children }) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      style={{ ...base, ...(variant === "primary" ? primary : ghost) }}
-      className="hover:opacity-90"
+      className={`${styles.button}`}
     >
       {children}
     </button>
   );
 }
 
-function ModalButton({ onClick, variant, children }) {
-  const base = {
-    cursor: "pointer",
-    fontSize: "16rem",
-    fontFamily: "Inter, sans-serif",
-    fontWeight: 700,
-    padding: "10rem 20rem",
-    borderRadius: "5rem",
-    letterSpacing: "0.01em",
-  };
-  const ghost = {
-    background: "#667761",
-    border: "none",
-    color: "#fff",
-    width: "100%",
-  };
-  const primary = {
-    background: "rgba(255,255,255,0.94)",
-    border: "none",
-    color: "#0e0e0e",
-    fontWeight: 600,
-  };
+function CookieCTA({ label, onClick, hidden }) {
   return (
     <button
+      type="button"
+      aria-label={label}
+      aria-hidden={hidden}
+      aria-haspopup="dialog"
+      aria-controls="cookie-settings-dialog"
+      title={label}
       onClick={onClick}
-      style={{ ...base, ...(variant === "primary" ? primary : ghost) }}
-      className="hover:opacity-90 transition-all duration-150"
+      tabIndex={hidden ? -1 : 0}
+      className={`${styles.cookieCta} ${
+        hidden ? styles.cookieCtaHidden : ""
+      }`}
     >
-      {children}
+      <Cookie aria-hidden="true" strokeWidth={1.7} />
     </button>
   );
 }

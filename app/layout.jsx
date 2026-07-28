@@ -1,7 +1,6 @@
 import { Inter } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import GoogleTagManager from "./components/GoogleTagManager";
 import ConsentManager from "./components/cookie/ConsentManager";
 
 const inter = Inter({
@@ -61,7 +60,6 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const GTM_ID = "GTM-5ZS2J3NB";
   return (
     <html lang="ro" className={inter.className} data-scroll-behavior="smooth">
       <head>
@@ -133,18 +131,6 @@ export default function RootLayout({ children }) {
           }}
         />
 
-        <GoogleTagManager gtmId={GTM_ID} />
-        <noscript
-          dangerouslySetInnerHTML={{
-            __html: `
-            <iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}"
-                    height="0"
-                    width="0"
-                    style="display:none;visibility:hidden">
-            </iframe>
-            `,
-          }}
-        />
       </head>
       <body className={`antialiased`}>
         {children}
