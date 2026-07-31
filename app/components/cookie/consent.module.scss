@@ -2,7 +2,7 @@ $green: #667761;
 $green-dark: #6f7d5a;
 $paper: #faf9f7;
 $ink: #171916;
-$muted: #646962;
+$muted: #90a1b9;
 $line: rgba(23, 25, 22, 0.12);
 
 .bannerBackdrop,
@@ -42,7 +42,7 @@ $line: rgba(23, 25, 22, 0.12);
 .localeSwitcher {
   display: flex;
   align-items: center;
-  gap: 14rem;
+  gap: 8rem;
 
   button {
     border: 0;
@@ -86,7 +86,7 @@ $line: rgba(23, 25, 22, 0.12);
 
   p {
     margin-top: 13rem;
-    color: $muted;
+    color: #646962;
     font-size: 14rem;
     line-height: 1.55;
   }
@@ -231,8 +231,8 @@ $line: rgba(23, 25, 22, 0.12);
 
   p {
     margin-top: 6rem;
-    color: $muted;
-    font-size: 12rem;
+    color: #646962;
+    font-size: 13rem;
     line-height: 1.5;
   }
 }
