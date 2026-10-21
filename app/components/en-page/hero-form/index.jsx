@@ -33,6 +33,9 @@ export const HeroForm = ({
 
   const [isDisabled, setIsDisabled] = React.useState(false);
   const [isHoveredButton, setIsHoveredButton] = React.useState(false);
+  const [isSending, setIsSending] = React.useState(false);
+  const [sendError, setSendError] = React.useState(false);
+  const honeypotRef = React.useRef(null);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -69,6 +72,20 @@ export const HeroForm = ({
       setEmail("");
       setPhone("");
     }, [setEmail, setName, setPhone]);
+
+  // Keep the form open and filled until ENSO has the lead.
+  const handleSubmitClick = async () => {
+    if (isSending) return;
+    setIsSending(true);
+    setSendError(false);
+    const delivered = await formSubmitTrack({
+      honeypot: honeypotRef.current?.value,
+    });
+    if (!delivered) {
+      setIsSending(false);
+      setSendError(true);
+    }
+  };
 
   return (
     <div className={styles.section}>
@@ -220,13 +237,22 @@ export const HeroForm = ({
                 }}
               />
             </div>
+            <input
+              type="text"
+              name="contact_me_by_fax_only"
+              ref={honeypotRef}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }}
+            />
             <motion.button
               type="button"
               id="_form_1_submit"
               className={styles.offer__btn}
               aria-label="form submitted"
-              onClick={formSubmitTrack}
-              disabled={!isDisabled}
+              onClick={handleSubmitClick}
+              disabled={!isDisabled || isSending}
               onHoverStart={() => setIsHoveredButton(true)}
               onHoverEnd={() => setIsHoveredButton(false)}
             >
@@ -278,6 +304,11 @@ export const HeroForm = ({
                 />
               </svg>
             </motion.button>
+            {sendError && (
+              <p role="alert" className="mt-[14rem] text-center text-[16rem] sm:text-[20rem] text-[#c0392b]">
+                We couldn't send your request. Please try again or call us.
+              </p>
+            )}
           </form>
         </div>
       </div>

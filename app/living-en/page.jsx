@@ -25,6 +25,7 @@ import { v4 as uuidv4 } from "uuid";
 import { useRouter } from "next/navigation";
 import { readTrackingIds, waitForTrackingIds } from "../../lib/tracking-ids";
 import { whenMarketingConsent } from "../../lib/consent";
+import { submitLead } from "../../lib/submit-lead";
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_PIXEL_ID;
 
@@ -84,14 +85,37 @@ export default function Home() {
     setIsFBC(fbc)
   }, []);
 
-  const formSubmitTrack = async () => {
-    if (isFormSubmitted) return;
+  const submissionIdRef = React.useRef(null);
+
+  // Sends the lead to ENSO first. Resolves to true once ENSO has it; the form
+  // shows an error otherwise. Meta and PostHog fire only after that.
+  const formSubmitTrack = async ({ honeypot } = {}) => {
+    if (isFormSubmitted) return true;
 
     setIsFormSubmitted(true);
 
     const submittedName = name;
     const submittedEmail = email;
     const submittedPhone = phone;
+
+    // One id per lead. A retry after a failed send reuses it, so ENSO never
+    // records the same lead twice. The same id goes to Meta and PostHog.
+    if (!submissionIdRef.current) submissionIdRef.current = uuidv4();
+    const submissionId = submissionIdRef.current;
+
+    const delivered = await submitLead({
+      submissionId,
+      name: submittedName,
+      email: submittedEmail,
+      phone: submittedPhone,
+      placement: "popup",
+      honeypot,
+    });
+    if (!delivered) {
+      setIsFormSubmitted(false);
+      return false;
+    }
+
     const trackingIds = await waitForTrackingIds();
     const pageviewEventId = trackingIds.pageview_event_id || isPageViewEventId;
     const externalId = trackingIds.external_id || isExternalId;
@@ -109,7 +133,7 @@ export default function Home() {
         "Lead",
         {},
         {
-          eventID: isFormSubmittedEventId,
+          eventID: submissionId,
           fbc,
           em: submittedEmail,
           ph: submittedPhone,
@@ -123,18 +147,19 @@ export default function Home() {
     }
 
     if (typeof window !== "undefined" && window.posthog)
+      // Analytics only: the lead itself already reached ENSO above.
       window.posthog.capture("form_submitted", {
         fbc,
         fbp,
-        email: submittedEmail,
-        phone: submittedPhone,
-        name: submittedName,
+        placement: "popup",
         pageview_event_id: pageviewEventId,
         external_id: externalId,
-        form_submitted_event_id: isFormSubmittedEventId,
+        submission_id: submissionId,
+        form_submitted_event_id: submissionId,
       });
 
     router.push("/thank-you-en");
+    return true;
   };
 
   const handlerFormOpen = () => {
