@@ -31,6 +31,9 @@ export const HeroForm = ({
     query: "(max-width: 640px)",
   });
   const [isHoveredButton, setIsHoveredButton] = React.useState(false);
+  const [isSending, setIsSending] = React.useState(false);
+  const [sendError, setSendError] = React.useState(false);
+  const honeypotRef = React.useRef(null);
 
   const handleChangeName = (e) => {
     setName(e.target.value);
@@ -66,18 +69,29 @@ export const HeroForm = ({
   }, [setEmail, setName, setPhone]);
 
   const handleSubmit = React.useCallback(
-    (event) => {
+    async (event) => {
       event.preventDefault();
 
-      if (isSubmitDisabled) {
+      if (isSubmitDisabled || isSending) {
         return;
       }
 
-      formSubmitTrack();
+      // Keep the form open and filled until ENSO has the lead.
+      setIsSending(true);
+      setSendError(false);
+      const delivered = await formSubmitTrack({
+        honeypot: honeypotRef.current?.value,
+      });
+      if (!delivered) {
+        setIsSending(false);
+        setSendError(true);
+        return;
+      }
+
       clearForm();
       handlerFormOpen();
     },
-    [clearForm, formSubmitTrack, handlerFormOpen, isSubmitDisabled],
+    [clearForm, formSubmitTrack, handlerFormOpen, isSubmitDisabled, isSending],
   );
 
   const isSubmitReady = !isSubmitDisabled;
@@ -235,12 +249,21 @@ export const HeroForm = ({
                 }}
               />
             </div>
+            <input
+              type="text"
+              name="contact_me_by_fax_only"
+              ref={honeypotRef}
+              tabIndex={-1}
+              autoComplete="off"
+              aria-hidden="true"
+              style={{ position: "absolute", left: "-10000px", width: 1, height: 1, opacity: 0 }}
+            />
             <motion.button
               type="submit"
               id="_form_1_submit"
               className={styles.offer__btn}
               aria-label="form submitted"
-              disabled={isSubmitDisabled}
+              disabled={isSubmitDisabled || isSending}
               onHoverStart={() => setIsHoveredButton(true)}
               onHoverEnd={() => setIsHoveredButton(false)}
             >
@@ -296,6 +319,11 @@ export const HeroForm = ({
                 />
               </svg>
             </motion.button>
+            {sendError && (
+              <p role="alert" className="mt-[14rem] text-center text-[16rem] sm:text-[20rem] text-[#c0392b]">
+                Nu am putut trimite cererea. Încearcă din nou sau sună-ne.
+              </p>
+            )}
           </form>
         </div>
       </div>
