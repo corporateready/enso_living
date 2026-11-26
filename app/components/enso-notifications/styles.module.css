@@ -1,0 +1,220 @@
+/*
+ * A page of ENSO Notifications (app/en/enso-notifications), set like this
+ * site's privacy policy and terms (app/privacy-policy/styles.module.scss):
+ * their column under their header, bold headings over medium-weight text.
+ * Added for these pages: their own menu, lists and links, and a narrower
+ * measure so long lines stay readable. The site's rem follows the window
+ * (app/globals.css), so the reading sizes have a floor in px, and from
+ * 1920px wide they stop growing, as the other legal pages' do.
+ */
+
+.page {
+  position: relative;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 60rem;
+  color: #000;
+  background: #fff;
+}
+
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20rem;
+}
+
+/* the three pages' own menu */
+.menu {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8rem 16rem;
+  margin: 0 0 20rem;
+  color: #6d6d6d;
+  font-size: max(13rem, 13px);
+}
+
+.menu a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 180ms ease;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: #000;
+}
+
+.menu [aria-current="page"] {
+  color: #000;
+  font-weight: 600;
+}
+
+.title {
+  margin: 0;
+  font-size: max(18rem, 21px);
+  font-weight: 700;
+  line-height: 1.2;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 12rem 0 0;
+  font-size: max(14rem, 16px);
+  font-weight: 500;
+  line-height: 1.45;
+  text-wrap: pretty;
+}
+
+.updated {
+  margin: 10rem 0 0;
+  color: #6d6d6d;
+  font-size: max(12rem, 13px);
+}
+
+.body {
+  margin-top: 24rem;
+  font-size: max(12rem, 15px);
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.body > * {
+  margin: 0;
+}
+
+.body > * + * {
+  margin-top: 0.8em;
+}
+
+.body > h2 {
+  margin-top: 1.7em;
+  font-size: max(14rem, 17px);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.body > h2:first-child {
+  margin-top: 0;
+}
+
+.body > h2 + * {
+  margin-top: 0.5em;
+}
+
+.body p,
+.body li {
+  text-wrap: pretty;
+}
+
+.body ul {
+  padding-left: 1.2em;
+  /* the site's reset (Tailwind) takes the markers off every list */
+  list-style: disc;
+}
+
+.body li + li {
+  margin-top: 0.35em;
+}
+
+.body a,
+.lead a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.15em;
+  transition: color 180ms ease;
+}
+
+.body a:hover,
+.lead a:hover {
+  color: #6d6d6d;
+}
+
+@media screen and (min-width: 640px) {
+  .page {
+    padding-bottom: 100rem;
+  }
+
+  .container {
+    width: 1440rem;
+    padding: 0;
+  }
+
+  .article {
+    max-width: max(1000rem, 640px);
+  }
+
+  .menu {
+    gap: 10rem 28rem;
+    margin-bottom: 32rem;
+    font-size: max(18rem, 14px);
+  }
+
+  .title {
+    font-size: max(32rem, 26px);
+  }
+
+  .lead {
+    margin-top: 16rem;
+    font-size: max(22rem, 18px);
+  }
+
+  .updated {
+    margin-top: 14rem;
+    font-size: max(16rem, 13px);
+  }
+
+  .body {
+    margin-top: 36rem;
+    font-size: max(20rem, 16px);
+  }
+
+  .body > h2 {
+    font-size: max(24rem, 19px);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .page {
+    padding-bottom: 100px;
+  }
+
+  .container {
+    width: 1200px;
+  }
+
+  .article {
+    max-width: 1000px;
+  }
+
+  .menu {
+    gap: 10px 28px;
+    margin-bottom: 32px;
+    font-size: 18px;
+  }
+
+  .title {
+    font-size: 32px;
+  }
+
+  .lead {
+    margin-top: 16px;
+    font-size: 22px;
+  }
+
+  .updated {
+    margin-top: 14px;
+    font-size: 16px;
+  }
+
+  .body {
+    margin-top: 36px;
+    font-size: 20px;
+  }
+
+  .body > h2 {
+    font-size: 24px;
+  }
+}
